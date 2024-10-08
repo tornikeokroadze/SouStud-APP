@@ -163,6 +163,7 @@ export default function App() {
                   />
                 )
               }}
+              initialParams={{ getToken }} 
             />
           </Tab.Navigator>
         ) : (

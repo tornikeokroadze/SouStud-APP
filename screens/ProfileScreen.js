@@ -8,15 +8,16 @@ import CardContent from '../components/CardContent';
 
 const { width, height } = Dimensions.get('window');
 
-const ProfileScreen = ({ }) => {
+const ProfileScreen = ({ route }) => {
 
   const [activeContent, setActiveContent] = useState('one');
+  const { getToken } = route.params;
 
   const navigation = useNavigation();
 
   async function logOutHendler() {
-    // const token = await AsyncStorage.getItem('Token');
-    // navigation.replace('LogIn');
+    await AsyncStorage.removeItem('Token');
+    getToken();
   }
 
   return (

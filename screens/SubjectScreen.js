@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, Modal, Button } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Modal, Button, Platform, Dimensions, SafeAreaView } from 'react-native';
 
 const subjects = [
   { id: '1', name: 'Programilebis sawyisebi', lecturer: 'Dr. Nana Gulua', activeScore: 25, shualeduriScore: 20, finaluriScore: 35 },
@@ -8,6 +8,8 @@ const subjects = [
   { id: '4', name: 'MMA', lecturer: 'Dr. Israel Adesanya', activeScore: 28, shualeduriScore: 25, finaluriScore: 38 },
   { id: '5', name: 'History', lecturer: 'Dr. Bladwin IV', activeScore: 27, shualeduriScore: 26, finaluriScore: 37 },
 ];
+
+const { width } = Dimensions.get('window');
 
 const SubjectItem = ({ name, lecturer, onPress }) => (
   <TouchableOpacity onPress={onPress} style={styles.card}>
@@ -42,59 +44,62 @@ const SubjectsScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={subjects}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <SubjectItem
-            name={item.name}
-            lecturer={item.lecturer}
-            onPress={() => openModal(item)}
-          />
-        )}
-      />
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#f8f9fa' }}>
+      <View style={styles.container}>
+        <FlatList
+          data={subjects}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <SubjectItem
+              name={item.name}
+              lecturer={item.lecturer}
+              onPress={() => openModal(item)}
+            />
+          )}
+        />
 
-      {selectedSubject && (
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={closeModal}
-        >
-          <View style={styles.modalContainer}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalTitle}>{selectedSubject.name}</Text>
+        {selectedSubject && (
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={closeModal}
+          >
+            <View style={styles.modalContainer}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalTitle}>{selectedSubject.name}</Text>
 
-              <Text style={styles.scoreText}>Active Score: {selectedSubject.activeScore}/30</Text>
-              <Text style={styles.scoreText}>Shualeduri Score: {selectedSubject.shualeduriScore}/30</Text>
-              <Text style={styles.scoreText}>Finaluri Score: {selectedSubject.finaluriScore}/40</Text>
+                <Text style={styles.scoreText}>Active Score: {selectedSubject.activeScore}/30</Text>
+                <Text style={styles.scoreText}>Shualeduri Score: {selectedSubject.shualeduriScore}/30</Text>
+                <Text style={styles.scoreText}>Finaluri Score: {selectedSubject.finaluriScore}/40</Text>
 
-             
-              <Text style={styles.totalScore}>
-                Total: {selectedSubject.activeScore + selectedSubject.shualeduriScore + selectedSubject.finaluriScore}/100
-              </Text>
 
-             
-              <Text style={styles.grade}>
-                Grade: {getGrade(selectedSubject.activeScore + selectedSubject.shualeduriScore + selectedSubject.finaluriScore)}
-              </Text>
+                <Text style={styles.totalScore}>
+                  Total: {selectedSubject.activeScore + selectedSubject.shualeduriScore + selectedSubject.finaluriScore}/100
+                </Text>
 
-              <Button title="Close" onPress={closeModal} />
+
+                <Text style={styles.grade}>
+                  Grade: {getGrade(selectedSubject.activeScore + selectedSubject.shualeduriScore + selectedSubject.finaluriScore)}
+                </Text>
+
+                <Button title="Close" onPress={closeModal} />
+              </View>
             </View>
-          </View>
-        </Modal>
-      )}
-    </View>
+          </Modal>
+        )}
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    marginTop:30,
+    // marginTop: 30,
     flex: 1,
     padding: 20,
-    backgroundColor: '#f2f2f2',
+    // backgroundColor: '#f2f2f2',
+    marginTop: Platform.OS === 'android' && width * 0.03
   },
   card: {
     backgroundColor: '#fff',

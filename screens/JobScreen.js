@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, Modal, Pressable, Animated } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Modal, Pressable, Animated, Platform, Dimensions, SafeAreaView } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 
@@ -8,6 +8,8 @@ const Job = [
   { id: '2', company: 'InnovateX', position: 'Backend Developer', date: '2024-10-20', status: 'Pending', location: 'On-site', type: 'Behavioral', feedback: 'Prepare for a coding challenge.' },
   { id: '3', company: 'GreenTech', position: 'Frontend Developer', date: '2024-10-25', status: 'Completed', location: 'On-site', type: 'Final Interview', feedback: 'Great job! We will contact you soon.' },
 ];
+
+const { width } = Dimensions.get('window');
 
 const JobItem = ({ company, position, date, onPress }) => (
   <TouchableOpacity onPress={onPress} style={styles.card}>
@@ -40,7 +42,7 @@ const JobScreen = () => {
   const closeModal = () => {
     Animated.timing(animation, {
       toValue: 0,
-      duration: 300,
+      duration: 200,
       useNativeDriver: true,
     }).start(() => setModalVisible(false));
   };
@@ -51,76 +53,79 @@ const JobScreen = () => {
   });
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={Job}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <JobItem
-            company={item.company}
-            position={item.position}
-            date={item.date}
-            onPress={() => openModal(item)}
-          />
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#f8f9fa' }}>
+      <View style={styles.container}>
+        <FlatList
+          data={Job}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <JobItem
+              company={item.company}
+              position={item.position}
+              date={item.date}
+              onPress={() => openModal(item)}
+            />
+          )}
+        />
+
+        {selectedJob && (
+          <Modal
+            animationType="none"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={closeModal}
+          >
+            <View style={styles.modalOverlay}>
+              <Animated.View style={[styles.modalView, { transform: [{ scale: modalScale }] }]}>
+                <View style={styles.modalBackground}>
+                  <Text style={styles.modalTitle}>{selectedJob.company}</Text>
+
+                  <View style={styles.modalSection}>
+                    <MaterialIcons name="work" size={24} color="#fff" />
+                    <Text style={styles.modalText}>Position: {selectedJob.position}</Text>
+                  </View>
+                  <View style={styles.modalSection}>
+                    <MaterialIcons name="event" size={24} color="#fff" />
+                    <Text style={styles.modalText}>Date: {selectedJob.date}</Text>
+                  </View>
+                  <View style={styles.modalSection}>
+                    <MaterialIcons name="check-circle" size={24} color="#fff" />
+                    <Text style={styles.modalText}>Status: {selectedJob.status}</Text>
+                  </View>
+                  <View style={styles.modalSection}>
+                    <MaterialIcons name="location-on" size={24} color="#fff" />
+                    <Text style={styles.modalText}>Location: {selectedJob.location}</Text>
+                  </View>
+                  <View style={styles.modalSection}>
+                    <MaterialIcons name="description" size={24} color="#fff" />
+                    <Text style={styles.modalText}>Type: {selectedJob.type}</Text>
+                  </View>
+                  <View style={styles.modalSection}>
+                    <MaterialIcons name="feedback" size={24} color="#fff" />
+                    <Text style={styles.modalText}>Feedback: {selectedJob.feedback}</Text>
+                  </View>
+
+                  <Pressable style={styles.closeButton} onPress={closeModal}>
+                    <Text style={styles.closeButtonText}>Close</Text>
+                  </Pressable>
+                </View>
+              </Animated.View>
+            </View>
+          </Modal>
         )}
-      />
-
-      {selectedJob && (
-        <Modal
-          animationType="none"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={closeModal}
-        >
-          <View style={styles.modalOverlay}>
-            <Animated.View style={[styles.modalView, { transform: [{ scale: modalScale }] }]}>
-              <View style={styles.modalBackground}>
-                <Text style={styles.modalTitle}>{selectedJob.company}</Text>
-
-                <View style={styles.modalSection}>
-                  <MaterialIcons name="work" size={24} color="#fff" />
-                  <Text style={styles.modalText}>Position: {selectedJob.position}</Text>
-                </View>
-                <View style={styles.modalSection}>
-                  <MaterialIcons name="event" size={24} color="#fff" />
-                  <Text style={styles.modalText}>Date: {selectedJob.date}</Text>
-                </View>
-                <View style={styles.modalSection}>
-                  <MaterialIcons name="check-circle" size={24} color="#fff" />
-                  <Text style={styles.modalText}>Status: {selectedJob.status}</Text>
-                </View>
-                <View style={styles.modalSection}>
-                  <MaterialIcons name="location-on" size={24} color="#fff" />
-                  <Text style={styles.modalText}>Location: {selectedJob.location}</Text>
-                </View>
-                <View style={styles.modalSection}>
-                  <MaterialIcons name="description" size={24} color="#fff" />
-                  <Text style={styles.modalText}>Type: {selectedJob.type}</Text>
-                </View>
-                <View style={styles.modalSection}>
-                  <MaterialIcons name="feedback" size={24} color="#fff" />
-                  <Text style={styles.modalText}>Feedback: {selectedJob.feedback}</Text>
-                </View>
-
-                <Pressable style={styles.closeButton} onPress={closeModal}>
-                  <Text style={styles.closeButtonText}>Close</Text>
-                </Pressable>
-              </View>
-            </Animated.View>
-          </View>
-        </Modal>
-      )}
-    </View>
+      </View>
+    </SafeAreaView>
   );
 };
 
 
 const styles = StyleSheet.create({
   container: {
-    marginTop:30,
+    // marginTop:30, აქ ესე კი ჩანს კარგად აიოესზე მარა ანდროიდისთვის ძაააან ბევრია 30   15 იც კი ბევრიაშ
     flex: 1,
     padding: 20,
-    backgroundColor: '#f8f9fa',
+    // backgroundColor: '#f2f2f2',
+    marginTop: Platform.OS === 'android' && width * 0.02
   },
   card: {
     backgroundColor: '#ffffff',
@@ -170,7 +175,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   modalBackground: {
-    backgroundColor: '#673ab7', 
+    backgroundColor: '#673ab7',
     borderRadius: 15,
     padding: 20,
   },
