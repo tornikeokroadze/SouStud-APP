@@ -4,6 +4,7 @@ import { useState } from 'react';
 import CustomButton from '../components/CustomButton';
 import CustomInput from '../components/CustomInput';
 import { icons } from '../constants';
+
 const { width, height } = Dimensions.get('window');
 
 const LogInScreen = ({ navigation, route }) => {
@@ -17,7 +18,8 @@ const LogInScreen = ({ navigation, route }) => {
 
     async function loginHandler() {
         await AsyncStorage.setItem('Token', Token);
-        navigation.replace('Home');
+        // navigation.replace('Home');
+        getToken();
     }
 
     const [form, setForm] = useState({
