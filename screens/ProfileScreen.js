@@ -38,18 +38,18 @@ const ProfileScreen = ({ route }) => {
         <View style={styles.contentInnerContainer}>
           <Text style={{ textAlign: 'center', fontSize: width * 0.05 }}>თორნიკე ოქროაძე</Text>
           <CardContent
-            otherStyles={{ marginTop: 8 }}
-            label="პირადი ნომერი"
-            text="00000000000"
-          />
-          <CardContent
             label="დავალიანება"
-            text="1125"
+            text="1125.00"
             textStyles={{ color: '#FF0000FF', fontWeight: 'bold' }}
+            otherStyles={{ marginTop: 8 }}
           />
           <CardContent
             label="სტატუსი"
             text="აქტიური"
+          />
+          <CardContent
+            label="გრანტი"
+            text="50%"
           />
         </View>
       </View>
@@ -60,13 +60,13 @@ const ProfileScreen = ({ route }) => {
             onPress={() => setActiveContent('one')}
             style={[styles.contentButtonContainer, activeContent === 'one' && { borderBottomColor: '#673ab7' }]}
           >
-            <Text>contentOne</Text>
+            <Text>ჩემ შესახებ</Text>
           </Pressable>
           <Pressable
             onPress={() => setActiveContent('two')}
             style={[styles.contentButtonContainer, activeContent === 'two' && { borderBottomColor: '#673ab7' }]}
           >
-            <Text>contentTwo</Text>
+            <Text>ჩარიცხვის ინფორმაცია</Text>
           </Pressable>
         </View>
 
@@ -79,10 +79,88 @@ const ProfileScreen = ({ route }) => {
             {activeContent === "one" ?
               (
                 <View>
-                  
+                  <CardContent
+                    label="პირადი ნომერი"
+                    text="0000000000"
+                    otherStyles={{ marginTop: 15 }}
+                    labelStyle={{ fontSize: 14 }}
+                    textStyles={{ fontSize: 14 }}
+                  />
+                  <CardContent
+                    label="დაბადების თარიღი"
+                    text="07.26.2000"
+                    labelStyle={{ fontSize: 14 }}
+                    textStyles={{ fontSize: 14 }}
+                  />
+                  <CardContent
+                    label="სოციალური სტატუსი"
+                    text="სოციალურად დაუცველი"
+                    labelStyle={{ fontSize: 14 }}
+                    textStyles={{ fontSize: 14 }}
+                  />
+                  <CardContent
+                    label="Email"
+                    text="vigacajigari@sou.edu.ge"
+                    labelStyle={{ fontSize: 14 }}
+                    textStyles={{ fontSize: 14 }}
+                  />
+                  <CardContent
+                    label="მისამართი"
+                    text="სადღაც ძაან შორს გადაკარგულში"
+                    labelStyle={{ fontSize: 14 }}
+                    textStyles={{ fontSize: 14 }}
+                  />
+                  <CardContent
+                    label="მობილური"
+                    text="000000000"
+                    labelStyle={{ fontSize: 14 }}
+                    textStyles={{ fontSize: 14 }}
+                  />
                 </View>
               ) : (
-                <View></View>
+                <View>
+                  <CardContent
+                    label="ფაკულტეტი"
+                    text="საბუნებისმეტყველო მეცნიერებათა, მათემატიკის, ტექნოლოგიებისა და ფარმაციის ფაკულტეტი"
+                    otherStyles={{ marginTop: 15 }}
+                    labelStyle={{ fontSize: 14 }}
+                    textStyles={{ fontSize: 14 }}
+                    info={true}
+                  />
+                  <CardContent
+                    label="სპეციალობა"
+                    text="კომპიუტერული ტექნოლოგიები"
+                    labelStyle={{ fontSize: 14 }}
+                    textStyles={{ fontSize: 14 }}
+                    info={true}
+                  />
+                  <CardContent
+                    label="ჩარიცხვის თარიღი"
+                    text="16.09.2024"
+                    labelStyle={{ fontSize: 14 }}
+                    textStyles={{ fontSize: 14 }}
+                    info={true}
+                  />
+                  <CardContent
+                    label="საფეხური"
+                    text="ბაკალავრიატი"
+                    labelStyle={{ fontSize: 14 }}
+                    textStyles={{ fontSize: 14 }}
+                    info={true}
+                  />
+                  <CardContent
+                    label="სემესტრი"
+                    text="7"
+                    labelStyle={{ fontSize: 14 }}
+                    textStyles={{ fontSize: 14 }}
+                    info={true}
+                  />
+                  <CardContent
+                    label="GPA"
+                    text="3.58"
+                    info={true}
+                  />
+                </View>
               )
             }
           </View>

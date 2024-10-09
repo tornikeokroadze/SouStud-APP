@@ -121,10 +121,8 @@ const JobScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    // marginTop:30, აქ ესე კი ჩანს კარგად აიოესზე მარა ანდროიდისთვის ძაააან ბევრია 30   15 იც კი ბევრიაშ
     flex: 1,
     padding: 20,
-    // backgroundColor: '#f2f2f2',
     marginTop: Platform.OS === 'android' && width * 0.02
   },
   card: {
