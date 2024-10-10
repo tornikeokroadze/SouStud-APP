@@ -11,11 +11,11 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient'; // Ensure this package is installed
+import { LinearGradient } from 'expo-linear-gradient'; 
 
 const { width } = Dimensions.get('window');
 
-// Sample data
+
 const subjects = [
   { id: '1', name: 'Programilebis sawyisebi', score: 80 },
   { id: '2', name: 'Algoritmebis sawyisebi', score: 90 },
@@ -40,7 +40,7 @@ const HomeScreen = () => {
   });
 
   const [showContent, setShowContent] = useState(false);
-  const fadeAnim = useRef(new Animated.Value(1)).current; // Initial value for opacity
+  const fadeAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
     // Fade out the welcome text
@@ -49,21 +49,21 @@ const HomeScreen = () => {
       duration: 3500,
       useNativeDriver: true,
     }).start(() => {
-      setShowContent(true); // Show content after the animation
+      setShowContent(true);
     });
   }, [fadeAnim]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        {/* Welcome Text */}
+        
         {!showContent && (
           <Animated.View style={{ opacity: fadeAnim }}>
             <Text style={styles.header}>Welcome to StudApp</Text>
           </Animated.View>
         )}
 
-        {/* Subjects Section */}
+     
         {showContent && (
           <TouchableWithoutFeedback onPress={() => setModalVisible({ ...modalVisible, subjects: true })}>
             <LinearGradient
@@ -83,7 +83,7 @@ const HomeScreen = () => {
           </TouchableWithoutFeedback>
         )}
 
-        {/* Assignments Section */}
+      
         {showContent && (
           <TouchableWithoutFeedback onPress={() => setModalVisible({ ...modalVisible, assignments: true })}>
             <LinearGradient
@@ -103,7 +103,7 @@ const HomeScreen = () => {
           </TouchableWithoutFeedback>
         )}
 
-        {/* Notifications Section */}
+    
         {showContent && (
           <TouchableWithoutFeedback onPress={() => setModalVisible({ ...modalVisible, notifications: true })}>
             <LinearGradient
@@ -123,7 +123,7 @@ const HomeScreen = () => {
           </TouchableWithoutFeedback>
         )}
 
-        {/* Modal for Subjects */}
+        
         <Modal
           animationType="slide"
           transparent={true}
@@ -146,7 +146,7 @@ const HomeScreen = () => {
               <TouchableOpacity 
                 style={styles.closeButton} 
                 onPress={() => setModalVisible({ ...modalVisible, subjects: false })}
-                activeOpacity={0.7} // This gives a subtle effect when pressed
+                activeOpacity={0.7} 
               >
                 <Text style={styles.closeModalText}>Close</Text>
               </TouchableOpacity>
@@ -154,7 +154,7 @@ const HomeScreen = () => {
           </View>
         </Modal>
 
-        {/* Modal for Assignments */}
+        
         <Modal
           animationType="slide"
           transparent={true}
@@ -185,7 +185,7 @@ const HomeScreen = () => {
           </View>
         </Modal>
 
-        {/* Modal for Notifications */}
+       
         <Modal
           animationType="slide"
           transparent={true}
@@ -302,7 +302,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 15,
-    color: '#673ab7', // Same color as section titles
+    color: '#673ab7',
     textAlign: 'center',
   },
   modalItemText: {
@@ -326,12 +326,12 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     marginTop: 20,
-    backgroundColor: '#4fc3f7', // Lighter blue color
+    backgroundColor: '#4fc3f7', 
     borderRadius: 5,
     paddingVertical: 10,
   },
   closeModalText: {
-    color: 'white', // Set the text color to white
+    color: 'white', 
     textAlign: 'center',
     fontSize: 18,
     fontWeight: 'bold',
