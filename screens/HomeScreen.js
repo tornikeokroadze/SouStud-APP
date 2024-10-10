@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient'; 
+// es daayenet npm install 'expo-linear-gradient'
 
 const { width } = Dimensions.get('window');
 
