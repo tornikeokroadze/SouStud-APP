@@ -10,13 +10,19 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "1.23.1",
+    "@react-native-async-storage/root": "github:react-native-async-storage/async-storage",
     "@react-navigation/material-bottom-tabs": "^6.2.29",
     "@react-navigation/native-stack": "^6.11.0",
+    "@reduxjs/toolkit": "^2.2.8",
+    "axios": "^1.7.7",
     "expo": "~51.0.28",
     "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
     "react-native": "0.74.5",
-    "react-native-paper": "^5.12.5"
+    "react-native-animated-spinkit": "^1.5.2",
+    "react-native-paper": "^5.12.5",
+    "react-redux": "^9.1.2",
+    "redux": "^5.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
