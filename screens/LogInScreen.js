@@ -14,12 +14,13 @@ import { useState } from "react";
 import CustomButton from "../components/CustomButton";
 import CustomInput from "../components/CustomInput";
 import { icons } from "../constants";
+import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../store/authActions";
 
 const { width } = Dimensions.get("window");
 
-const LogInScreen = () => {
+export default function LogInScreen({ navigation }) {
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.auth);
 
@@ -61,7 +62,7 @@ const LogInScreen = () => {
     if (!valid) {
       setTimeout(() => {
         setErrors({ personal_number: null, password: null });
-      }, 3400);
+      }, 5000);
     }
 
     return valid;
@@ -138,9 +139,7 @@ const LogInScreen = () => {
       </ScrollView>
     </SafeAreaView>
   );
-};
-
-export default LogInScreen;
+}
 
 const styles = StyleSheet.create({
   rootContainer: {

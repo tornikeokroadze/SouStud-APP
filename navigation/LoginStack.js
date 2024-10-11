@@ -3,6 +3,7 @@ import PasswordResetScreen from "../screens/PasswordResetScreen";
 import MessageScreen from "../screens/MessageScreen";
 import ConfirmScreen from "../screens/ConfirmScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Pressable, Text } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
