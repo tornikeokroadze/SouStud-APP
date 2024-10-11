@@ -113,7 +113,6 @@ export default function LogInScreen({ navigation }) {
                 handleChangeText={(value) =>
                   handleInputChange("password", value)
                 }
-                keyboardType="numeric"
                 error={errors.password}
               />
               {errors.password && (
