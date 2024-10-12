@@ -28,14 +28,14 @@ export default function ProfileScreen() {
   function logOutHandler() {
     Alert.alert(
       "გასვლა",
-      "ნამდვილად გსურთ გასვლა?",
+      `${user.name} ნამდვილად გსურთ გასვლა?`,
       [
+        {
+          text: "არა",
+        },
         {
           text: "დიახ",
           onPress: () => dispatch(logoutUser()),
-        },
-        {
-          text: "არა",
         },
       ],
       { cancelable: false },
