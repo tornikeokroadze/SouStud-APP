@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden'
   },
   bttonText: {
+    color: '#FFFFFF',
     fontSize: width * 0.055,
     textAlign: 'center'
   },
