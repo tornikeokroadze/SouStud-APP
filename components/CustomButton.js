@@ -3,9 +3,9 @@ import { StyleSheet, View, Text, Pressable, Platform, Dimensions } from 'react-n
 
 const { width, height } = Dimensions.get('window');
 
-const CustomButton = ({ children, onPress }) => {
+const CustomButton = ({ children, onPress, otherStyles }) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, otherStyles]}>
       <Pressable
         onPress={onPress}
         style={({ pressed }) => pressed && styles.pressed}

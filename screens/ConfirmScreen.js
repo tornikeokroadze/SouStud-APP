@@ -1,9 +1,7 @@
-import { StyleSheet, View, Text, Pressable, SafeAreaView, Platform, Dimensions, ScrollView, Image } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StyleSheet, View, SafeAreaView, Platform, Dimensions, ScrollView } from 'react-native'
 import { useState } from 'react';
 import CustomButton from '../components/CustomButton';
 import CustomInput from '../components/CustomInput';
-import { icons } from '../constants';
 const { width, height } = Dimensions.get('window');
 
 const ConfirmScreen = ({ navigation }) => {
@@ -22,6 +20,7 @@ const ConfirmScreen = ({ navigation }) => {
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <View style={styles.cardOutContainer}>
                     <View style={styles.cardContainer}>
+                        <View style={styles.circle}></View>
                         <View style={styles.loginContainer}>
                             <CustomInput
                                 title="ახლი პაროლი"
@@ -69,6 +68,16 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 20,
+        overflow: 'hidden',
+    },
+    circle: {
+        backgroundColor: '#FF9001',
+        width: width * 0.4,
+        height: width * 0.4,
+        borderRadius: width * 0.2,
+        position: 'absolute',
+        top: -width * 0.06,
+        left: -width * 0.1,
     },
     loginContainer: {
         flex: 1,

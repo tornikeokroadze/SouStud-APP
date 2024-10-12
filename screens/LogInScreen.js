@@ -1,22 +1,20 @@
+import { login } from "../store/authActions";
 import {
   StyleSheet,
   View,
   Text,
-  Pressable,
   SafeAreaView,
   Platform,
   Dimensions,
   ScrollView,
   Image,
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState } from "react";
 import CustomButton from "../components/CustomButton";
 import CustomInput from "../components/CustomInput";
 import { icons } from "../constants";
-import { useNavigation } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
-import { login } from "../store/authActions";
 
 const { width } = Dimensions.get("window");
 
@@ -83,6 +81,7 @@ export default function LogInScreen({ navigation }) {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.cardOutContainer}>
           <View style={styles.cardContainer}>
+            <View style={styles.circle}></View>
             <View style={styles.loginContainer}>
               <View style={styles.loginInnerContainer}>
                 <Image
@@ -105,7 +104,6 @@ export default function LogInScreen({ navigation }) {
               {errors.personal_number && (
                 <Text style={styles.errorText}>{errors.personal_number}</Text>
               )}
-
               <CustomInput
                 title="პაროლი"
                 keyType="hide"
@@ -118,7 +116,6 @@ export default function LogInScreen({ navigation }) {
               {errors.password && (
                 <Text style={styles.errorText}>{errors.password}</Text>
               )}
-
               <CustomButton onPress={handleLogin}>შესვლა</CustomButton>
 
               <View style={styles.forgotPasswordContainer}>
@@ -160,6 +157,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 20,
+    overflow: "hidden",
+  },
+  circle: {
+    backgroundColor: "#FF9001",
+    width: width * 0.4,
+    height: width * 0.4,
+    borderRadius: width * 0.2,
+    position: "absolute",
+    top: -width * 0.06,
+    left: -width * 0.1,
   },
   logo: {
     width: 34,
@@ -183,8 +190,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   errorText: {
-    color: "#ff5a3c",
-    marginTop: 5,
-    fontSize: 14,
+    color: "#ff5132",
   },
 });

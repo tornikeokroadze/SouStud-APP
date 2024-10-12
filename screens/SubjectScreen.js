@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, SectionList, TouchableOpacity, StyleSheet, Modal, Button, Platform, Dimensions, SafeAreaView } from 'react-native';
+import { View, Text, SectionList, TouchableOpacity, StyleSheet, Modal, Platform, Dimensions, SafeAreaView } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'; 
 
 const sections = [
