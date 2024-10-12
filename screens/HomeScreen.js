@@ -9,23 +9,39 @@ import {
   TouchableWithoutFeedback,
   Animated,
   SafeAreaView,
-  Dimensions,
+  ScrollView,
   TouchableOpacity,
+  PixelRatio,
+  Dimensions,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-// es daayenet npm install 'expo-linear-gradient'
 
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
+const scale = width / 320;
+
+const normalize = (size) => {
+  const newSize = size * scale;
+  if (PixelRatio.get() >= 2 && PixelRatio.get() < 3) {
+    return newSize - 2;
+  } else if (PixelRatio.get() >= 3) {
+    return newSize;
+  } else {
+    return newSize + 1;
+  }
+};
 
 const subjects = [
   { id: "1", name: "Programilebis sawyisebi", score: 80 },
   { id: "2", name: "Algoritmebis sawyisebi", score: 90 },
   { id: "3", name: "Linux", score: 65 },
+  { id: "4", name: "Linux", score: 65 },
 ];
 
 const assignments = [
   { id: "1", title: "Sabakalavro Dacva", dueDate: "2024-10-15" },
   { id: "2", title: "Shualeduri Exam", dueDate: "2024-10-22" },
+  { id: "3", title: "Shualeduri Exam", dueDate: "2024-10-22" },
+  { id: "4", title: "Shualeduri Exam", dueDate: "2024-10-22" },
 ];
 
 const notifications = [
@@ -36,6 +52,51 @@ const notifications = [
   },
   {
     id: "2",
+    message: "New assignment posted for Algoritmebis sawyisebi.",
+    date: "2024-10-06",
+  },
+  {
+    id: "3",
+    message: "New assignment posted for Algoritmebis sawyisebi.",
+    date: "2024-10-06",
+  },
+  {
+    id: "4",
+    message: "New assignment posted for Algoritmebis sawyisebi.",
+    date: "2024-10-06",
+  },
+  {
+    id: "5",
+    message: "New assignment posted for Algoritmebis sawyisebi.",
+    date: "2024-10-06",
+  },
+  {
+    id: "6",
+    message: "New assignment posted for Algoritmebis sawyisebi.",
+    date: "2024-10-06",
+  },
+  {
+    id: "7",
+    message: "New assignment posted for Algoritmebis sawyisebi.",
+    date: "2024-10-06",
+  },
+  {
+    id: "8",
+    message: "New assignment posted for Algoritmebis sawyisebi.",
+    date: "2024-10-06",
+  },
+  {
+    id: "9",
+    message: "New assignment posted for Algoritmebis sawyisebi.",
+    date: "2024-10-06",
+  },
+  {
+    id: "10",
+    message: "New assignment posted for Algoritmebis sawyisebi.",
+    date: "2024-10-06",
+  },
+  {
+    id: "11",
     message: "New assignment posted for Algoritmebis sawyisebi.",
     date: "2024-10-06",
   },
@@ -52,10 +113,9 @@ const HomeScreen = () => {
   const fadeAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
-    // Fade out the welcome text
     Animated.timing(fadeAnim, {
       toValue: 0,
-      duration: 3500,
+      duration: 3200,
       useNativeDriver: true,
     }).start(() => {
       setShowContent(true);
@@ -64,184 +124,151 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        {!showContent && (
+      {!showContent && (
+        <View style={styles.centeredContainer}>
           <Animated.View style={{ opacity: fadeAnim }}>
-            <Text style={styles.header}>Welcome to StudApp</Text>
+            <Text style={styles.header}>StudApp</Text>
           </Animated.View>
-        )}
+        </View>
+      )}
 
-        {showContent && (
-          <TouchableWithoutFeedback
-            onPress={() => setModalVisible({ ...modalVisible, subjects: true })}
-          >
-            <LinearGradient
-              colors={["#e0f7fa", "#80deea"]}
-              style={styles.section}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-            >
-              <Text style={styles.sectionTitle}>Subjects</Text>
-              {subjects.map((subject) => (
-                <View key={subject.id} style={styles.itemContainer}>
-                  <Text style={styles.itemText}>{subject.name}</Text>
-                  <Text style={styles.scoreText}>{subject.score}</Text>
-                </View>
-              ))}
-            </LinearGradient>
-          </TouchableWithoutFeedback>
-        )}
-
-        {showContent && (
-          <TouchableWithoutFeedback
-            onPress={() =>
-              setModalVisible({ ...modalVisible, assignments: true })
-            }
-          >
-            <LinearGradient
-              colors={["#ffe0b2", "#ffcc80"]}
-              style={styles.section}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-            >
-              <Text style={styles.sectionTitle}>Upcoming Assignments</Text>
-              {assignments.map((assignment) => (
-                <View key={assignment.id} style={styles.itemContainer}>
-                  <Text style={styles.itemText}>{assignment.title}</Text>
-                  <Text style={styles.dueDateText}>{assignment.dueDate}</Text>
-                </View>
-              ))}
-            </LinearGradient>
-          </TouchableWithoutFeedback>
-        )}
-
-        {showContent && (
-          <TouchableWithoutFeedback
-            onPress={() =>
-              setModalVisible({ ...modalVisible, notifications: true })
-            }
-          >
-            <LinearGradient
-              colors={["#f1f8e9", "#c8e6c9"]}
-              style={styles.section}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-            >
-              <Text style={styles.sectionTitle}>Notifications</Text>
-              {notifications.map((notification) => (
-                <View key={notification.id} style={styles.itemContainer}>
-                  <Text style={styles.itemText}>{notification.message}</Text>
-                  <Text style={styles.dateText}>{notification.date}</Text>
-                </View>
-              ))}
-            </LinearGradient>
-          </TouchableWithoutFeedback>
-        )}
-
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible.subjects}
-          onRequestClose={() =>
-            setModalVisible({ ...modalVisible, subjects: false })
-          }
-        >
-          <View style={styles.modalContainer}>
-            <View style={styles.modalContent}>
-              <Text style={styles.modalSubtitle}>Subjects and Scores</Text>
-              <FlatList
-                data={subjects}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => (
-                  <View style={styles.itemContainer}>
-                    <Text style={styles.modalItemText}>{item.name}</Text>
-                    <Text style={styles.modalScoreText}>{item.score}</Text>
-                  </View>
-                )}
-              />
-              <TouchableOpacity
-                style={styles.closeButton}
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.container}>
+          {showContent && (
+            <>
+              <TouchableWithoutFeedback
                 onPress={() =>
-                  setModalVisible({ ...modalVisible, subjects: false })
+                  setModalVisible({ ...modalVisible, subjects: true })
                 }
-                activeOpacity={0.7}
               >
-                <Text style={styles.closeModalText}>Close</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Modal>
+                <LinearGradient
+                  colors={["#e0f7fa", "#80deea"]}
+                  style={styles.section}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                >
+                  <Text style={styles.sectionTitle}>Subjects</Text>
+                  {subjects.slice(-3).map((subject) => (
+                    <View key={subject.id} style={styles.itemContainer}>
+                      <Text style={styles.itemText}>{subject.name}</Text>
+                      <Text
+                        style={styles.secondaryText}
+                      >{`Score: ${subject.score}`}</Text>
+                    </View>
+                  ))}
+                </LinearGradient>
+              </TouchableWithoutFeedback>
 
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible.assignments}
-          onRequestClose={() =>
-            setModalVisible({ ...modalVisible, assignments: false })
-          }
-        >
-          <View style={styles.modalContainer}>
-            <View style={styles.modalContent}>
-              <Text style={styles.modalSubtitle}>
-                Assignments and Due Dates
-              </Text>
-              <FlatList
-                data={assignments}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => (
-                  <View style={styles.itemContainer}>
-                    <Text style={styles.modalItemText}>{item.title}</Text>
-                    <Text style={styles.modalDueDateText}>{item.dueDate}</Text>
-                  </View>
-                )}
-              />
-              <TouchableOpacity
-                style={styles.closeButton}
+              <TouchableWithoutFeedback
                 onPress={() =>
-                  setModalVisible({ ...modalVisible, assignments: false })
+                  setModalVisible({ ...modalVisible, assignments: true })
                 }
-                activeOpacity={0.7}
               >
-                <Text style={styles.closeModalText}>Close</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Modal>
+                <LinearGradient
+                  colors={["#ffe0b2", "#ffcc80"]}
+                  style={styles.section}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                >
+                  <Text style={styles.sectionTitle}>Upcoming Assignments</Text>
+                  {assignments.slice(-3).map((assignment) => (
+                    <View key={assignment.id} style={styles.itemContainer}>
+                      <Text style={styles.itemText}>{assignment.title}</Text>
+                      <Text
+                        style={styles.secondaryText}
+                      >{`Due: ${assignment.dueDate}`}</Text>
+                    </View>
+                  ))}
+                </LinearGradient>
+              </TouchableWithoutFeedback>
 
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible.notifications}
-          onRequestClose={() =>
-            setModalVisible({ ...modalVisible, notifications: false })
-          }
-        >
-          <View style={styles.modalContainer}>
-            <View style={styles.modalContent}>
-              <Text style={styles.modalSubtitle}>Your Notifications</Text>
-              <FlatList
-                data={notifications}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => (
-                  <View style={styles.itemContainer}>
-                    <Text style={styles.modalItemText}>{item.message}</Text>
-                    <Text style={styles.modalDateText}>{item.date}</Text>
-                  </View>
-                )}
-              />
-              <TouchableOpacity
-                style={styles.closeButton}
+              <TouchableWithoutFeedback
                 onPress={() =>
-                  setModalVisible({ ...modalVisible, notifications: false })
+                  setModalVisible({ ...modalVisible, notifications: true })
                 }
-                activeOpacity={0.7}
               >
-                <Text style={styles.closeModalText}>Close</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Modal>
-      </View>
+                <LinearGradient
+                  colors={["#f1f8e9", "#c8e6c9"]}
+                  style={styles.section}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                >
+                  <Text style={styles.sectionTitle}>Notifications</Text>
+                  {notifications.slice(-3).map((notification) => (
+                    <View key={notification.id} style={styles.itemContainer}>
+                      <Text style={styles.itemText}>
+                        {notification.message}
+                      </Text>
+                      <Text
+                        style={styles.secondaryText}
+                      >{`Date: ${notification.date}`}</Text>
+                    </View>
+                  ))}
+                </LinearGradient>
+              </TouchableWithoutFeedback>
+            </>
+          )}
+
+          {["subjects", "assignments", "notifications"].map((type) => (
+            <Modal
+              key={type}
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible[type]}
+              onRequestClose={() =>
+                setModalVisible({ ...modalVisible, [type]: false })
+              }
+            >
+              <View style={styles.modalContainer}>
+                <View
+                  style={[styles.modalContent, { maxHeight: height * 0.7 }]}
+                >
+                  <Text style={styles.modalSubtitle}>
+                    {type === "subjects"
+                      ? "Subjects and Scores"
+                      : type === "assignments"
+                        ? "Assignments and Due Dates"
+                        : "Your Notifications"}
+                  </Text>
+                  <FlatList
+                    data={
+                      type === "subjects"
+                        ? subjects
+                        : type === "assignments"
+                          ? assignments
+                          : notifications
+                    }
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => (
+                      <View style={styles.modalItemContainer}>
+                        <Text style={styles.modalItemText}>
+                          {item.name || item.title || item.message}
+                        </Text>
+                        <Text style={styles.modalDetailText}>
+                          {item.score
+                            ? `Score: ${item.score}`
+                            : item.dueDate
+                              ? `Due: ${item.dueDate}`
+                              : `Date: ${item.date}`}
+                        </Text>
+                      </View>
+                    )}
+                  />
+                  <TouchableOpacity
+                    style={styles.closeButton}
+                    onPress={() =>
+                      setModalVisible({ ...modalVisible, [type]: false })
+                    }
+                    activeOpacity={0.7}
+                  >
+                    <Text style={styles.closeModalText}>Close</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </Modal>
+          ))}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -251,23 +278,31 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#f4f4f9",
   },
+  scrollContainer: {
+    paddingVertical: 20,
+  },
   container: {
     flex: 1,
-    padding: 20,
-
+    padding: width * 0.06,
     justifyContent: "center",
   },
+  centeredContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   header: {
-    fontSize: 28,
+    fontSize: normalize(28),
     fontWeight: "bold",
     color: "#673ab7",
     textAlign: "center",
-    marginBottom: 20,
+    marginBottom: width * 0.05,
   },
   section: {
-    marginBottom: 20,
     borderRadius: 15,
-    padding: 20,
+
+    padding: width * 0.05,
+    marginVertical: 10,
     shadowColor: "#000",
     shadowOpacity: 0.25,
 
@@ -275,42 +310,29 @@ const styles = StyleSheet.create({
     elevation: 5,
     borderWidth: 1,
     borderColor: "#e0e0e0",
-    justifyContent: "center",
-    alignItems: "flex-start",
   },
   sectionTitle: {
-    fontSize: 22,
+    fontSize: normalize(18),
     fontWeight: "bold",
-
     marginBottom: 10,
     color: "#673ab7",
   },
 
   itemContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: "column",
+    alignItems: "flex-start",
     width: "100%",
     marginVertical: 5,
   },
   itemText: {
-    fontSize: 18,
+    fontSize: normalize(14),
+    fontWeight: "bold",
   },
-  scoreText: {
-    fontSize: 16,
-    color: "#333",
-    textAlign: "right",
-    flex: 0,
-  },
-  dueDateText: {
-    fontSize: 14,
+
+  secondaryText: {
+    fontSize: normalize(14),
     color: "#888",
-    textAlign: "right",
-  },
-  dateText: {
-    fontSize: 14,
-    color: "#888",
-    textAlign: "right",
+    marginTop: 3,
   },
   modalContainer: {
     flex: 1,
@@ -322,49 +344,42 @@ const styles = StyleSheet.create({
     width: width * 0.9,
     backgroundColor: "#fff",
     borderRadius: 15,
-    padding: 20,
+    padding: width * 0.06,
     shadowColor: "#000",
+
     shadowOpacity: 0.25,
     shadowRadius: 10,
     elevation: 5,
   },
   modalSubtitle: {
-    fontSize: 18,
+    fontSize: normalize(18),
     fontWeight: "bold",
-    marginBottom: 15,
     color: "#673ab7",
-    textAlign: "center",
+    marginBottom: 10,
+  },
+  modalItemContainer: {
+    flexDirection: "column",
+    alignItems: "flex-start",
+    marginVertical: 5,
   },
   modalItemText: {
-    fontSize: 18,
-    flex: 1,
+    fontSize: normalize(14),
   },
-  modalScoreText: {
-    fontSize: 18,
-    fontWeight: "bold",
-    textAlign: "right",
-  },
-  modalDueDateText: {
-    fontSize: 16,
+
+  modalDetailText: {
+    fontSize: normalize(14),
     color: "#888",
-    textAlign: "right",
-  },
-  modalDateText: {
-    fontSize: 16,
-    color: "#888",
-    textAlign: "right",
   },
   closeButton: {
-    marginTop: 20,
-    backgroundColor: "#4fc3f7",
-    borderRadius: 5,
-    paddingVertical: 10,
+    marginTop: 15,
+    padding: width * 0.03,
+    backgroundColor: "#673ab7",
+    borderRadius: 10,
   },
   closeModalText: {
-    color: "white",
+    fontSize: normalize(16),
+    color: "#fff",
     textAlign: "center",
-    fontSize: 18,
-    fontWeight: "bold",
   },
 });
 
