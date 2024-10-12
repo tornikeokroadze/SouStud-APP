@@ -10,7 +10,7 @@ import {
 } from "./authSlice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const API_URL = "https://d5b6-91-184-122-110.ngrok-free.app/api";
+const API_URL = "https://mole-adjusted-owl.ngrok-free.app/api";
 
 export const login = (credentials) => async (dispatch) => {
   try {
