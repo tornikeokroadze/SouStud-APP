@@ -34,15 +34,17 @@ export default function LoginStack() {
       />
 
       <Stack.Screen
-        name='MobileNumber'
+        name="MobileNumber"
         component={MobileNumberScreen}
         options={({ navigation }) => ({
-          title: '',
+          title: "",
           headerBackVisible: false,
           gestureEnabled: false,
           headerLeft: () => (
-            <Pressable onPress={() => navigation.navigate('LogIn')}>
-              <Text style={{ marginRight: 15, color: 'blue', fontSize: 18 }}>ავტორიზაცია</Text>
+            <Pressable onPress={() => navigation.navigate("LogIn")}>
+              <Text style={{ marginRight: 15, color: "blue", fontSize: 18 }}>
+                ავტორიზაცია
+              </Text>
             </Pressable>
           ),
         })}

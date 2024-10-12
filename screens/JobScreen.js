@@ -1,15 +1,53 @@
-import React, { useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, Modal, Pressable, Animated, Platform, Dimensions, SafeAreaView } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
-
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  StyleSheet,
+  Modal,
+  Pressable,
+  Animated,
+  Platform,
+  Dimensions,
+  SafeAreaView,
+} from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const Job = [
-  { id: '1', company: 'Tech Corp', position: 'Software Engineer', date: '2024-10-15', status: 'Scheduled', location: 'Online', type: 'Technical', feedback: 'Looking forward to meeting you!' },
-  { id: '2', company: 'InnovateX', position: 'Backend Developer', date: '2024-10-20', status: 'Pending', location: 'On-site', type: 'Behavioral', feedback: 'Prepare for a coding challenge.' },
-  { id: '3', company: 'GreenTech', position: 'Frontend Developer', date: '2024-10-25', status: 'Completed', location: 'On-site', type: 'Final Interview', feedback: 'Great job! We will contact you soon.' },
+  {
+    id: "1",
+    company: "Tech Corp",
+    position: "Software Engineer",
+    date: "2024-10-15",
+    status: "Scheduled",
+    location: "Online",
+    type: "Technical",
+    feedback: "Looking forward to meeting you!",
+  },
+  {
+    id: "2",
+    company: "InnovateX",
+    position: "Backend Developer",
+    date: "2024-10-20",
+    status: "Pending",
+    location: "On-site",
+    type: "Behavioral",
+    feedback: "Prepare for a coding challenge.",
+  },
+  {
+    id: "3",
+    company: "GreenTech",
+    position: "Frontend Developer",
+    date: "2024-10-25",
+    status: "Completed",
+    location: "On-site",
+    type: "Final Interview",
+    feedback: "Great job! We will contact you soon.",
+  },
 ];
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
 const JobItem = ({ company, position, date, onPress }) => (
   <TouchableOpacity onPress={onPress} style={styles.card}>
@@ -53,7 +91,7 @@ const JobScreen = () => {
   });
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#f8f9fa' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#f8f9fa" }}>
       <View style={styles.container}>
         <FlatList
           data={Job}
@@ -76,33 +114,50 @@ const JobScreen = () => {
             onRequestClose={closeModal}
           >
             <View style={styles.modalOverlay}>
-              <Animated.View style={[styles.modalView, { transform: [{ scale: modalScale }] }]}>
+              <Animated.View
+                style={[
+                  styles.modalView,
+                  { transform: [{ scale: modalScale }] },
+                ]}
+              >
                 <View style={styles.modalBackground}>
                   <Text style={styles.modalTitle}>{selectedJob.company}</Text>
 
                   <View style={styles.modalSection}>
                     <MaterialIcons name="work" size={24} color="#fff" />
-                    <Text style={styles.modalText}>Position: {selectedJob.position}</Text>
+                    <Text style={styles.modalText}>
+                      Position: {selectedJob.position}
+                    </Text>
                   </View>
                   <View style={styles.modalSection}>
                     <MaterialIcons name="event" size={24} color="#fff" />
-                    <Text style={styles.modalText}>Date: {selectedJob.date}</Text>
+                    <Text style={styles.modalText}>
+                      Date: {selectedJob.date}
+                    </Text>
                   </View>
                   <View style={styles.modalSection}>
                     <MaterialIcons name="check-circle" size={24} color="#fff" />
-                    <Text style={styles.modalText}>Status: {selectedJob.status}</Text>
+                    <Text style={styles.modalText}>
+                      Status: {selectedJob.status}
+                    </Text>
                   </View>
                   <View style={styles.modalSection}>
                     <MaterialIcons name="location-on" size={24} color="#fff" />
-                    <Text style={styles.modalText}>Location: {selectedJob.location}</Text>
+                    <Text style={styles.modalText}>
+                      Location: {selectedJob.location}
+                    </Text>
                   </View>
                   <View style={styles.modalSection}>
                     <MaterialIcons name="description" size={24} color="#fff" />
-                    <Text style={styles.modalText}>Type: {selectedJob.type}</Text>
+                    <Text style={styles.modalText}>
+                      Type: {selectedJob.type}
+                    </Text>
                   </View>
                   <View style={styles.modalSection}>
                     <MaterialIcons name="feedback" size={24} color="#fff" />
-                    <Text style={styles.modalText}>Feedback: {selectedJob.feedback}</Text>
+                    <Text style={styles.modalText}>
+                      Feedback: {selectedJob.feedback}
+                    </Text>
                   </View>
 
                   <Pressable style={styles.closeButton} onPress={closeModal}>
@@ -118,19 +173,18 @@ const JobScreen = () => {
   );
 };
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    marginTop: Platform.OS === 'android' && width * 0.02
+    marginTop: Platform.OS === "android" && width * 0.02,
   },
   card: {
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
     borderRadius: 10,
     marginVertical: 10,
     elevation: 3,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 5,
   },
@@ -139,72 +193,72 @@ const styles = StyleSheet.create({
   },
   companyName: {
     fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
+    fontWeight: "bold",
+    color: "#333",
   },
   position: {
     fontSize: 16,
-    color: '#555',
+    color: "#555",
     marginTop: 5,
   },
   detailsContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginTop: 10,
   },
   date: {
     fontSize: 14,
-    color: '#777',
+    color: "#777",
     marginLeft: 5,
   },
   modalOverlay: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
   },
   modalView: {
-    width: '90%',
+    width: "90%",
     borderRadius: 15,
     padding: 20,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOpacity: 0.3,
     shadowRadius: 10,
     elevation: 5,
   },
   modalBackground: {
-    backgroundColor: '#673ab7',
+    backgroundColor: "#673ab7",
     borderRadius: 15,
     padding: 20,
   },
   modalTitle: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: '#fff',
+    fontWeight: "bold",
+    color: "#fff",
     marginBottom: 15,
   },
   modalText: {
     fontSize: 16,
     marginBottom: 8,
-    color: '#fff',
+    color: "#fff",
   },
   modalSection: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginVertical: 5,
   },
   closeButton: {
     marginTop: 20,
-    backgroundColor: '#ff4757',
+    backgroundColor: "#ff4757",
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    alignSelf: 'center',
+    alignSelf: "center",
     elevation: 2,
   },
   closeButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
   },
 });
 
