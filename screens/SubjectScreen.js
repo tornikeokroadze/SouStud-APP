@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, SectionList, TouchableOpacity, StyleSheet, Modal, Platform, Dimensions, SafeAreaView } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons'; 
+import { View, Text, SectionList, TouchableOpacity, StyleSheet, Modal, PixelRatio, Platform, Dimensions, SafeAreaView } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const sections = [
   {
@@ -29,6 +29,18 @@ const sections = [
 ];
 
 const { width } = Dimensions.get('window');
+const scale = width / 320;
+
+const normalize = (size) => {
+  const newSize = size * scale;
+  if (PixelRatio.get() >= 2 && PixelRatio.get() < 3) {
+    return newSize - 2; 
+  } else if (PixelRatio.get() >= 3) {
+    return newSize;
+  } else {
+    return newSize + 1;
+  }
+};
 
 const SubjectItem = ({ name, lecturer, totalScore, onPress, passed }) => (
   <TouchableOpacity onPress={onPress} style={styles.card}>
@@ -40,7 +52,7 @@ const SubjectItem = ({ name, lecturer, totalScore, onPress, passed }) => (
       {passed !== null && (
         <MaterialIcons
           name={passed ? "check-circle" : "cancel"}
-          size={24}
+          size={normalize(24)}
           color={passed ? "green" : "red"}
         />
       )}
@@ -77,7 +89,7 @@ const SubjectsScreen = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#f8f9fa' }}>
+    <SafeAreaView style={{ flex: 1}}>
       <View style={styles.container}>
         <SectionList
           sections={sections}
@@ -134,13 +146,13 @@ const SubjectsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    marginTop: Platform.OS === 'android' && width * 0.03,
+    padding: width * 0.05,  
+    backgroundColor: '#fff'
   },
   card: {
     backgroundColor: '#fff',
-    padding: 20,
-    marginVertical: 10,
+    padding: width * 0.05,  
+    marginVertical: width * 0.03,  
     borderRadius: 8,
     shadowColor: '#000',
     shadowOpacity: 0.1,
@@ -153,73 +165,73 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   subjectName: {
-    fontSize: 18,
+    fontSize: normalize(14), 
     fontWeight: 'bold',
   },
   lecturer: {
-    fontSize: 16,
+    fontSize: normalize(12), 
     color: '#555',
     marginTop: 5,
   },
   sectionHeader: {
-    fontSize: 20,
+    fontSize: normalize(18),
     fontWeight: 'bold',
-    backgroundColor: '#f2f2f2',
-    paddingVertical: 10,
-    paddingHorizontal: 10,
+    backgroundColor: '#fff',
+    color: '#673ab7',
+    paddingVertical: width * 0.03,  
+    paddingHorizontal: width * 0.04, 
   },
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: '#ddd',
   },
   modalView: {
     width: '90%',
     maxWidth: 400,
     backgroundColor: '#ffffff',
     borderRadius: 15,
-    padding: 20,
+    padding: width * 0.06,  
     shadowColor: '#000',
     shadowOpacity: 0.25,
     shadowRadius: 10,
     elevation: 10,
   },
   modalTitle: {
-    fontSize: 24,
+    fontSize: normalize(18),
     fontWeight: 'bold',
     marginBottom: 15,
     color: '#333',
   },
   scoreText: {
-    fontSize: 16,
+    fontSize: normalize(14),
     marginBottom: 10,
     color: '#555',
   },
   totalScore: {
-    fontSize: 18,
+    fontSize: normalize(18),
     fontWeight: 'bold',
     marginVertical: 10,
     textAlign: 'center',
     color: '#007BFF',
   },
   grade: {
-    fontSize: 18,
+    fontSize: normalize(18),
     fontWeight: 'bold',
     marginVertical: 10,
     textAlign: 'center',
-    color: '#28A745',
   },
   closeButton: {
     marginTop: 20,
-    padding: 10,
-    backgroundColor: '#007BFF',
+    padding: width * 0.03, 
+    backgroundColor: '#673ab7',
     borderRadius: 5,
     alignItems: 'center',
   },
   closeButtonText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: normalize(16),
     fontWeight: 'bold',
   },
 });
