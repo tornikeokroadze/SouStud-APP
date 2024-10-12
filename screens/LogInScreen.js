@@ -85,11 +85,11 @@ export default function LogInScreen({ navigation }) {
             <View style={styles.loginContainer}>
               <View style={styles.loginInnerContainer}>
                 <Image
-                  source={icons.home}
+                  source={icons.logo}
                   resizeMode="contains"
                   style={styles.logo}
                 />
-                <Text style={styles.logoText}>StudApp-ში შესვლა</Text>
+                <Text style={styles.logoText}>SouStudApp-ში შესვლა</Text>
               </View>
               <CustomInput
                 title="პირადი ნომერი"
@@ -169,8 +169,8 @@ const styles = StyleSheet.create({
     left: -width * 0.1,
   },
   logo: {
-    width: 34,
-    height: 34,
+    width: width * 0.2,
+    height: width * 0.2,
   },
   logoText: {
     fontSize: 24,

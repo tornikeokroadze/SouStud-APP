@@ -5,6 +5,7 @@ import eye from "../assets/icones/eye.png";
 import exit from "../assets/icones/exit.png";
 import book from "../assets/icones/book.png";
 import job from "../assets/icones/job.png";
+import logo from "../assets/icones/logo.png";
 
 export default {
     home,
@@ -14,4 +15,5 @@ export default {
     exit,
     book,
     job,
+    logo,
 };
