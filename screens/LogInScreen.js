@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Pressable, SafeAreaView, Platform, Dimensions, ScrollView, Image } from 'react-native'
+import { StyleSheet, View, Text, SafeAreaView, Platform, Dimensions, ScrollView, Image } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
 import CustomButton from '../components/CustomButton';
@@ -32,6 +32,7 @@ const LogInScreen = ({ navigation, route }) => {
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <View style={styles.cardOutContainer}>
                     <View style={styles.cardContainer}>
+                        <View style={styles.circle}></View>
                         <View style={styles.loginContainer}>
                             <View style={styles.loginInnerContainer}>
                                 <Image
@@ -96,6 +97,16 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 20,
+        overflow: 'hidden',
+    },
+    circle: {
+        backgroundColor: '#FF9001',
+        width: width * 0.4,
+        height: width * 0.4,
+        borderRadius: width * 0.2,
+        position: 'absolute',
+        top: -width * 0.06,
+        left: -width * 0.1,
     },
     logo: {
         width: 34,

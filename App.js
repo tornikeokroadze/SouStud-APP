@@ -15,6 +15,7 @@ import LogInScreen from './screens/LogInScreen';
 import PasswordResetScreen from './screens/PasswordResetScreen';
 import MessageScreen from './screens/MessageScreen'
 import ConfirmScreen from './screens/ConfirmScreen'
+import MobileNumberScreen from './screens/MobileNumberScreen'
 
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +50,21 @@ function LoginStack({ getToken}) {
       />
 
       <Stack.Screen
+        name='MobileNumber'
+        component={MobileNumberScreen}
+        options={({ navigation }) => ({
+          title: '',
+          headerBackVisible: false,
+          gestureEnabled: false,
+          headerLeft: () => (
+            <Pressable onPress={() => navigation.navigate('LogIn')}>
+              <Text style={{ marginRight: 15, color: 'blue', fontSize: 18 }}>ავტორიზაცია</Text>
+            </Pressable>
+          ),
+        })}
+      />
+
+      <Stack.Screen
         name='Message'
         component={MessageScreen}
         options={({ navigation }) => ({
@@ -66,11 +82,16 @@ function LoginStack({ getToken}) {
       <Stack.Screen
         name='Confirm'
         component={ConfirmScreen}
-        options={{
-          headerShown: true,
-          headerBackVisible: true,
+        options={({ navigation }) => ({
+          title: '',
+          headerBackVisible: false,
           gestureEnabled: false,
-        }}
+          headerLeft: () => (
+            <Pressable onPress={() => navigation.navigate('LogIn')}>
+              <Text style={{ marginRight: 15, color: 'blue', fontSize: 18 }}>ავტორიზაცია</Text>
+            </Pressable>
+          ),
+        })}
       />
     </Stack.Navigator>
   );

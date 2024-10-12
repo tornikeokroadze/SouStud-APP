@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, View, Text, Platform, Dimensions, Image, Pressable, ScrollView } from 'react-native'
+import { StyleSheet, View, Text, Dimensions, Image, Pressable, ScrollView } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 

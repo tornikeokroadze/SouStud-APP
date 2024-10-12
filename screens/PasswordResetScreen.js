@@ -1,15 +1,13 @@
-import { StyleSheet, View, Text, Pressable, SafeAreaView, Platform, Dimensions, ScrollView, Image } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StyleSheet, View, SafeAreaView, Platform, Dimensions, ScrollView } from 'react-native'
 import { useState } from 'react';
 import CustomButton from '../components/CustomButton';
 import CustomInput from '../components/CustomInput';
-import { icons } from '../constants';
 const { width, height } = Dimensions.get('window');
 
 export default function PasswordResetScreen({ navigation }) {
 
-    function goToMessage() {
-        navigation.navigate("Message");
+    function goToPhoneNumber() {
+        navigation.navigate("MobileNumber");
     }
 
     const [form, setForm] = useState({
@@ -29,7 +27,7 @@ export default function PasswordResetScreen({ navigation }) {
                                 handleChangeText={(e) => setForm({ ...form, personalNum: e })}
                                 keyboardType="numeric"
                             />
-                            <CustomButton onPress={goToMessage}>დადასტურება</CustomButton>
+                            <CustomButton onPress={goToPhoneNumber}>დადასტურება</CustomButton>
                         </View>
                     </View>
                 </View>
