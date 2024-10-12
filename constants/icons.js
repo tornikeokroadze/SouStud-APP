@@ -6,14 +6,16 @@ import exit from "../assets/icones/exit.png";
 import book from "../assets/icones/book.png";
 import job from "../assets/icones/job.png";
 import logo from "../assets/icones/logo.png";
+import logoBG from "../assets/icones/logoBG.png";
 
 export default {
-    home,
-    user,
-    eyeCrossed,
-    eye,
-    exit,
-    book,
-    job,
-    logo,
+  home,
+  user,
+  eyeCrossed,
+  eye,
+  exit,
+  book,
+  job,
+  logo,
+  logoBG,
 };
