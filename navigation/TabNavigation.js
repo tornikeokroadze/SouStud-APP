@@ -1,7 +1,7 @@
-import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SubjectScreen from "../screens/SubjectScreen";
 import JobScreen from "../screens/JobScreen";
+import NewsScreen from "../screens/NewsScreen";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { icons } from "../constants";
 import { Image, StyleSheet, Dimensions } from "react-native";
@@ -18,13 +18,13 @@ export default function TabNavigation() {
       shifting={true}
     >
       <Tab.Screen
-        name="Home"
-        component={HomeScreen}
+        name="Profile"
+        component={ProfileScreen}
         options={{
-          tabBarLabel: "მთავარი",
+          tabBarLabel: "პროფილი",
           tabBarIcon: ({ focused }) => (
             <Image
-              source={icons.home}
+              source={icons.user}
               resizeMode="contain"
               style={[
                 styles.icon,
@@ -38,7 +38,7 @@ export default function TabNavigation() {
         name="Subject"
         component={SubjectScreen}
         options={{
-          tabBarLabel: "საგანი",
+          tabBarLabel: "საგნები",
           tabBarIcon: ({ focused }) => (
             <Image
               source={icons.book}
@@ -55,7 +55,7 @@ export default function TabNavigation() {
         name="Job"
         component={JobScreen}
         options={{
-          tabBarLabel: "ვაკანსია",
+          tabBarLabel: "ვაკანსიები",
           tabBarIcon: ({ focused }) => (
             <Image
               source={icons.job}
@@ -69,13 +69,13 @@ export default function TabNavigation() {
         }}
       />
       <Tab.Screen
-        name="Profile"
-        component={ProfileScreen}
+        name="News"
+        component={NewsScreen}
         options={{
-          tabBarLabel: "პროფილი",
+          tabBarLabel: "სიახლეები",
           tabBarIcon: ({ focused }) => (
             <Image
-              source={icons.user}
+              source={icons.news}
               resizeMode="contain"
               style={[
                 styles.icon,

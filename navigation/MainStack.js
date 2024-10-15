@@ -16,6 +16,7 @@ export default function MainStack() {
   const { user, loading, error, isAuthenticated } = useSelector(
     (state) => state.auth,
   );
+  const { newsData, loadingNews } = useSelector((state) => state.news);
 
   usePushNotifications(isAuthenticated);
   useEffect(() => {
