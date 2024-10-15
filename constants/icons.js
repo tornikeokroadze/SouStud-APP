@@ -7,6 +7,8 @@ import book from "../assets/icones/book.png";
 import job from "../assets/icones/job.png";
 import logo from "../assets/icones/logo.png";
 import logoBG from "../assets/icones/logoBG.png";
+import news from "../assets/icones/news.png";
+import calendar from "../assets/icones/calendar.png";
 
 export default {
   home,
@@ -17,5 +19,7 @@ export default {
   book,
   job,
   logo,
+  news,
+  calendar,
   logoBG,
 };
