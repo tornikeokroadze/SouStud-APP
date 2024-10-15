@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { icons } from './constants'
 import HomeScreen from './screens/HomeScreen';
+import NewsScreen from './screens/NewsScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import Jobscreen from './screens/JobScreen';
 import SubjectScreen from './screens/SubjectScreen';
@@ -22,7 +23,7 @@ const Stack = createNativeStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 const { width } = Dimensions.get('window');
 
-function LoginStack({ getToken}) {
+function LoginStack({ getToken }) {
   return (
     <Stack.Navigator
     >
@@ -32,7 +33,7 @@ function LoginStack({ getToken}) {
         options={{
           headerShown: false
         }}
-        initialParams={{ getToken }} 
+        initialParams={{ getToken }}
       />
       <Stack.Screen
         name='PasswordReset'
@@ -142,6 +143,21 @@ export default function App() {
             />
 
             <Tab.Screen
+              name='News'
+              component={NewsScreen}
+              options={{
+                tabBarLabel: 'News',
+                tabBarIcon: ({ focused }) => (
+                  <Image
+                    source={icons.news}
+                    resizeMode='contain'
+                    style={[styles.icon, { tintColor: focused ? '#673ab7' : '#FFFFFF' }]}
+                  />
+                )
+              }}
+            />
+
+            <Tab.Screen
               name='Subject'
               component={SubjectScreen}
               options={{
@@ -184,7 +200,7 @@ export default function App() {
                   />
                 )
               }}
-              initialParams={{ getToken }} 
+              initialParams={{ getToken }}
             />
           </Tab.Navigator>
         ) : (

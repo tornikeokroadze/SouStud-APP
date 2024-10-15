@@ -6,6 +6,8 @@ import exit from "../assets/icones/exit.png";
 import book from "../assets/icones/book.png";
 import job from "../assets/icones/job.png";
 import logo from "../assets/icones/logo.png";
+import news from "../assets/icones/news.png";
+import calendar from "../assets/icones/calendar.png";
 
 export default {
     home,
@@ -16,4 +18,6 @@ export default {
     book,
     job,
     logo,
+    news,
+    calendar,
 };
