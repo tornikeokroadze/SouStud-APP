@@ -21,7 +21,7 @@ export default function TabNavigation() {
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarLabel: "Home",
+          tabBarLabel: "მთავარი",
           tabBarIcon: ({ focused }) => (
             <Image
               source={icons.home}
@@ -38,7 +38,7 @@ export default function TabNavigation() {
         name="Subject"
         component={SubjectScreen}
         options={{
-          tabBarLabel: "Subject",
+          tabBarLabel: "საგანი",
           tabBarIcon: ({ focused }) => (
             <Image
               source={icons.book}
@@ -55,7 +55,7 @@ export default function TabNavigation() {
         name="Job"
         component={JobScreen}
         options={{
-          tabBarLabel: "Job",
+          tabBarLabel: "ვაკანსია",
           tabBarIcon: ({ focused }) => (
             <Image
               source={icons.job}
@@ -72,7 +72,7 @@ export default function TabNavigation() {
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarLabel: "Profile",
+          tabBarLabel: "პროფილი",
           tabBarIcon: ({ focused }) => (
             <Image
               source={icons.user}

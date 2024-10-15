@@ -6,7 +6,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Pressable, Text } from "react-native";
 import MobileNumberScreen from "../screens/MobileNumberScreen";
 
+import MobileNumberScreen from ".."
+
 const Stack = createNativeStackNavigator();
+
 
 export default function LoginStack() {
   return (

@@ -6,7 +6,7 @@ import MainStack from "./navigation/MainStack";
 export default function App() {
   return (
     <Provider store={store}>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
       <MainStack />
     </Provider>
   );

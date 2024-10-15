@@ -15,7 +15,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 const sections = [
   {
-    title: "Current Semester",
+    title: "მიმდინარე სემესტრი",
     data: [
       {
         id: "1",
@@ -60,7 +60,7 @@ const sections = [
     ],
   },
   {
-    title: "Last Semester",
+    title: "ბოლო სემესტრი",
     data: [
       {
         id: "6",

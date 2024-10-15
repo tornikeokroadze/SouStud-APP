@@ -11,6 +11,7 @@
   "dependencies": {
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-native-async-storage/root": "github:react-native-async-storage/async-storage",
+    "@react-native-picker/picker": "^2.8.1",
     "@react-navigation/material-bottom-tabs": "^6.2.29",
     "@react-navigation/native-stack": "^6.11.0",
     "@reduxjs/toolkit": "^2.2.8",
@@ -25,7 +26,8 @@
     "react-native-htmlview": "^0.17.0",
     "react-native-paper": "^5.12.5",
     "react-redux": "^9.1.2",
-    "redux": "^5.0.1"
+    "redux": "^5.0.1",
+    "expo-notifications": "~0.28.18"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

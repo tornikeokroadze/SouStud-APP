@@ -7,6 +7,7 @@ import TabNavigation from "../navigation/TabNavigation";
 import LoginStack from "../navigation/LoginStack";
 import { useEffect } from "react";
 import { checkToken } from "../store/authActions";
+import { usePushNotifications } from "../notification/usePushNotifications";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ export default function MainStack() {
     (state) => state.auth,
   );
 
+  usePushNotifications(isAuthenticated);
   useEffect(() => {
     dispatch(checkToken());
   }, [dispatch]);
