@@ -18,15 +18,7 @@ export default function NewsStack() {
         component={NewsShowScreen}
         options={({ navigation }) => ({
           title: "",
-          // headerBackVisible: false,
           gestureEnabled: true,
-          // headerLeft: () => (
-          //   <Pressable onPress={() => navigation.navigate("NewsScreen")}>
-          //     <Text style={{ marginRight: 15, color: "blue", fontSize: 18 }}>
-          //       სიახლეები
-          //     </Text>
-          //   </Pressable>
-          // ),
         })}
       />
     </Stack.Navigator>

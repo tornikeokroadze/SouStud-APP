@@ -10,13 +10,12 @@ import {
 import { useState } from "react";
 
 import NewsModal from "../components/NewsModal";
-import { images } from "../constants";
 import RenderHtml from "react-native-render-html";
 
 const { width, height } = Dimensions.get("window");
 
 export default function NewsShowScreen({ route }) {
-  const { id, title, text, date, image } = route.params;
+  const { title, text, date, image } = route.params;
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleImagePress = () => {
@@ -33,7 +32,7 @@ export default function NewsShowScreen({ route }) {
         <TouchableOpacity onPress={handleImagePress}>
           <Image
             source={{ uri: image }}
-            resizeMode="conatin"
+            resizeMode="contain"
             style={styles.image}
           />
         </TouchableOpacity>
