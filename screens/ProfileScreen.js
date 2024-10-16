@@ -9,8 +9,6 @@ import {
   ScrollView,
   Alert,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from "@react-navigation/native";
 
 import { icons } from "../constants";
 import CardContent from "../components/CardContent";

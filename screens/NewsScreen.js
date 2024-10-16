@@ -13,7 +13,6 @@ import { images } from "../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { news } from "../store/newsAction";
-// import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get("window");
 
@@ -25,18 +24,12 @@ const truncateText = (text, limit) => {
 };
 
 export default function NewsScreen({ navigation }) {
-  // const navigation = useNavigation();
-
   const dispatch = useDispatch();
   const { newsData, loadingNews } = useSelector((state) => state.news);
 
   function navigationHandler(item) {
     navigation.navigate("NewsShow", {
       id: item.id,
-      title: item.title,
-      text: item.text,
-      date: item.date,
-      image: item.image,
     });
   }
 

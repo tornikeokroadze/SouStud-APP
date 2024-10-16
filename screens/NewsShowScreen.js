@@ -12,10 +12,14 @@ import { useState } from "react";
 import NewsModal from "../components/NewsModal";
 import RenderHtml from "react-native-render-html";
 
+import { useSelector } from "react-redux";
+
 const { width, height } = Dimensions.get("window");
 
 export default function NewsShowScreen({ route }) {
-  const { title, text, date, image } = route.params;
+  const { id = null } = route.params;
+  const { newsData } = useSelector((state) => state.news);
+  const filteredNews = newsData.find((newsItem) => newsItem.id === id);
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleImagePress = () => {
@@ -31,7 +35,7 @@ export default function NewsShowScreen({ route }) {
       <View style={styles.imageConatiner}>
         <TouchableOpacity onPress={handleImagePress}>
           <Image
-            source={{ uri: image }}
+            source={{ uri: filteredNews.image }}
             resizeMode="contain"
             style={styles.image}
           />
@@ -41,17 +45,17 @@ export default function NewsShowScreen({ route }) {
       <NewsModal
         modalVisible={modalVisible}
         closeModal={closeModal}
-        imageUrl={{ uri: image }}
+        imageUrl={{ uri: filteredNews.image }}
       />
 
       <View style={styles.srcollConatiner}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.contentConatiner}>
-            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.title}>{filteredNews.title}</Text>
             <RenderHtml
               contentWidth={width}
               ignoredDomTags={["o:p"]}
-              source={{ html: text }}
+              source={{ html: filteredNews.text }}
               baseStyle={styles.text}
             />
           </View>

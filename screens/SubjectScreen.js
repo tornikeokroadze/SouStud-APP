@@ -294,7 +294,6 @@ const styles = StyleSheet.create({
   },
   container: {
     marginTop: Platform.OS === "android" && width * 0.1,
-    // backgroundColor: "#fff",
   },
   card: {
     marginHorizontal: width * 0.05,

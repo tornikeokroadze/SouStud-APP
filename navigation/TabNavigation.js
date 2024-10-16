@@ -2,7 +2,6 @@ import { Image, StyleSheet, Dimensions } from "react-native";
 import ProfileScreen from "../screens/ProfileScreen";
 import SubjectScreen from "../screens/SubjectScreen";
 import JobScreen from "../screens/JobScreen";
-// import NewsScreen from "../screens/NewsScreen";
 import NewsStack from "./NewsStact";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { icons } from "../constants";

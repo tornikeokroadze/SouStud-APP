@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 import CustomButton from "../components/CustomButton";
 import CustomInput from "../components/CustomInput";
-const { width, height } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 
 export default function MessageScreen({ navigation }) {
   function goToConfirm() {
