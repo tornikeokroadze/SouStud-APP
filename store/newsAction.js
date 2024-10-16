@@ -18,6 +18,6 @@ export const news = () => async (dispatch) => {
 
     dispatch(responseData({ newsData }));
   } catch (error) {
-    console.error("Error fetching news", error);
+    return;
   }
 };

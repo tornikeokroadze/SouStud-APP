@@ -6,18 +6,39 @@ import {
   Platform,
   Dimensions,
   ScrollView,
+  SectionList,
 } from "react-native";
 import NewsCard from "../components/NewsCard";
-import { images } from "../constants"; //es satestod aris
+import { images } from "../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { news } from "../store/newsAction";
+// import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get("window");
 
-const NewsScreen = () => {
+const truncateText = (text, limit) => {
+  if (text.length > limit) {
+    return text.substring(0, limit) + "...";
+  }
+  return text;
+};
+
+export default function NewsScreen({ navigation }) {
+  // const navigation = useNavigation();
+
   const dispatch = useDispatch();
   const { newsData, loadingNews } = useSelector((state) => state.news);
+
+  function navigationHandler(item) {
+    navigation.navigate("NewsShow", {
+      id: item.id,
+      title: item.title,
+      text: item.text,
+      date: item.date,
+      image: item.image,
+    });
+  }
 
   useEffect(() => {
     dispatch(news());
@@ -31,21 +52,23 @@ const NewsScreen = () => {
   }
   return (
     <SafeAreaView style={styles.rootContainer}>
-      <ScrollView>
-        <View style={styles.innerConatiner}>
-          <NewsCard
-            title="სოხუმის სახელმწიფო უნივერსიტეტის განვითარების..."
-            date="2024-10-03"
-            imageUrl={images.souLogo}
-            // OnPress={}
-          />
-        </View>
-      </ScrollView>
+      <SectionList
+        sections={[{ title: "News", data: newsData }]}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <View style={styles.innerConatiner}>
+            <NewsCard
+              title={truncateText(item.title, 60)}
+              date={item.date}
+              imageUrl={{ uri: item.image }}
+              onPress={() => navigationHandler(item)}
+            />
+          </View>
+        )}
+      />
     </SafeAreaView>
   );
-};
-
-export default NewsScreen;
+}
 
 const styles = StyleSheet.create({
   rootContainer: {

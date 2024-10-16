@@ -191,7 +191,7 @@ const SubjectsScreen = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={styles.rootContainer}>
       <View style={styles.container}>
         <SectionList
           sections={sections}
@@ -288,9 +288,13 @@ const SubjectsScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  rootContainer: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#F3F3F3FF",
+  },
+  container: {
+    marginTop: Platform.OS === "android" && width * 0.1,
+    // backgroundColor: "#fff",
   },
   card: {
     marginHorizontal: width * 0.05,
@@ -320,7 +324,7 @@ const styles = StyleSheet.create({
   sectionHeader: {
     fontSize: normalize(18),
     fontWeight: "bold",
-    backgroundColor: "#fff",
+    backgroundColor: "#F3F3F3FF",
     color: "#673ab7",
     paddingVertical: width * 0.03,
     paddingHorizontal: width * 0.04,

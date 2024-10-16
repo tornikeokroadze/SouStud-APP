@@ -44,7 +44,7 @@ export function usePushNotifications(isAuthenticated) {
           });
         }
       } catch (error) {
-        console.error("Error during notification registration:", error);
+        return;
       }
     };
 
@@ -86,12 +86,7 @@ const sendTokenToBackend = async (expoToken) => {
         },
       },
     );
-
-    console.log("Token sent successfully:", response.data);
   } catch (error) {
-    console.error(
-      "Error storing token:",
-      error.response ? error.response.data : error.message,
-    );
+    return;
   }
 };

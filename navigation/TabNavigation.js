@@ -1,11 +1,11 @@
+import { Image, StyleSheet, Dimensions } from "react-native";
 import ProfileScreen from "../screens/ProfileScreen";
 import SubjectScreen from "../screens/SubjectScreen";
 import JobScreen from "../screens/JobScreen";
-import NewsScreen from "../screens/NewsScreen";
+// import NewsScreen from "../screens/NewsScreen";
+import NewsStack from "./NewsStact";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { icons } from "../constants";
-import { Image, StyleSheet, Dimensions } from "react-native";
-
 const { width } = Dimensions.get("window");
 const Tab = createMaterialBottomTabNavigator();
 export default function TabNavigation() {
@@ -70,7 +70,7 @@ export default function TabNavigation() {
       />
       <Tab.Screen
         name="News"
-        component={NewsScreen}
+        component={NewsStack}
         options={{
           tabBarLabel: "სიახლეები",
           tabBarIcon: ({ focused }) => (

@@ -24,7 +24,7 @@ const NewsCard = ({ onPress, imageUrl, title, date }) => {
             <View style={styles.iamgeContainer}>
               <Image
                 source={imageUrl}
-                resizeMode="contain"
+                resizeMode="cover"
                 style={styles.image}
               />
             </View>

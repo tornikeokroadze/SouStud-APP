@@ -48,7 +48,7 @@ export const logoutUser = () => async (dispatch) => {
       );
     }
   } catch (error) {
-    console.error("Logout error:", error);
+    return;
   } finally {
     await AsyncStorage.removeItem("token");
     dispatch(logout());
@@ -61,7 +61,6 @@ export const checkToken = () => async (dispatch) => {
   const token = await AsyncStorage.getItem("token");
   // const token = await AsyncStorage.removeItem("token");
   if (token == null) {
-    // console.log(token);
     dispatch(logout());
   } else if (token) {
     const response = await axios.get(`${API_URL}/user`, {
