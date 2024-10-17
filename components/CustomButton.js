@@ -1,7 +1,13 @@
-import { StyleSheet, View, Text, Pressable, Platform, Dimensions } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  Text,
+  Pressable,
+  Platform,
+  Dimensions,
+} from "react-native";
 
-
-const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get("window");
 
 const CustomButton = ({ children, onPress, otherStyles }) => {
   return (
@@ -9,46 +15,44 @@ const CustomButton = ({ children, onPress, otherStyles }) => {
       <Pressable
         onPress={onPress}
         style={({ pressed }) => pressed && styles.pressed}
-        android_ripple={{ color: '#DA7B00FF' }}   //6f00f6
+        android_ripple={{ color: "#DA7B00FF" }}
       >
-        <View
-          style={styles.bttonContainer}
-        >
+        <View style={styles.bttonContainer}>
           <Text style={styles.bttonText}>{children}</Text>
         </View>
       </Pressable>
     </View>
-  )
-}
+  );
+};
 
-export default CustomButton
+export default CustomButton;
 
 const styles = StyleSheet.create({
   container: {
     marginTop: height * 0.02,
     borderRadius: 24,
-    overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+    overflow: Platform.OS === "android" ? "hidden" : "visible",
     elevation: 8,
-    shadowColor: 'black',
+    shadowColor: "black",
     shadowOpacity: 0.25,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 20,
-    backgroundColor: '#FF9001',
+    backgroundColor: "#FF9001",
   },
   bttonContainer: {
     paddingVertical: width * 0.04,
     paddingHorizontal: width * 0.1,
     borderRadius: 20,
-    overflow: 'hidden'
+    overflow: "hidden",
   },
   bttonText: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: width * 0.055,
-    textAlign: 'center'
+    textAlign: "center",
   },
   pressed: {
-    opacity: 0.80,
-    backgroundColor: '#DA7B00FF',
-    borderRadius: 20.
-  }
+    opacity: 0.8,
+    backgroundColor: "#DA7B00FF",
+    borderRadius: 20,
+  },
 });

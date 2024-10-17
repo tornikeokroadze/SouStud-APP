@@ -1,21 +1,24 @@
-import React, { useState } from 'react';
-import { View, Text, SectionList, TouchableOpacity, StyleSheet, Modal, PixelRatio, Dimensions, SafeAreaView } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  SectionList,
+  StyleSheet,
+  PixelRatio,
+  Dimensions,
+  SafeAreaView,
+  TextInput,
+  Platform,
+} from "react-native";
 
-const jobs = [
-  {
-    title: 'Current Openings',
-    data: [
-      { id: '1', title: 'Software Engineer', company: 'Xinklis Saxli', location: 'Zugdidi, Samegrelo', salary: '$60k - $80k', type: 'Full-time' },
-      { id: '2', title: 'Frontend Developer', company: 'Beer Estrella', location: 'Akhalkhalakhi, Georgia', salary: '$40k - $60k', type: 'Part-time' },
-      { id: '3', title: 'Backend Developer', company: 'NB Generals', location: 'Vani, Georgia', salary: '$50k - $70k', type: 'Remote' },
-      { id: '4', title: 'Backend Developer', company: 'Google', location: 'los angeles, USA', salary: '$90k - $100k', type: 'Remote' },
-      { id: '5', title: 'Backend Developer', company: 'Twittler', location: 'ohaio, USA', salary: '$110k - $170k', type: 'Remote' },
-    ],
-  },
-];
+import { MaterialIcons } from "@expo/vector-icons";
+import { Flow } from "react-native-animated-spinkit";
+import { Picker } from "@react-native-picker/picker";
+import axios from "axios";
+import JobItem from "../components/JobItem";
+import { FlatList } from "react-native";
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 const scale = width / 320;
 
 const normalize = (size) => {
@@ -23,201 +26,156 @@ const normalize = (size) => {
   return PixelRatio.get() >= 3 ? newSize : newSize - 2;
 };
 
-const JobItem = ({ title, company, location, salary, type, onPress }) => (
-  <TouchableOpacity onPress={onPress} style={styles.card}>
-    <View style={styles.jobRow}>
-      <View>
-        <Text style={styles.jobTitle}>{title}</Text>
-        <Text style={styles.companyName}>{company}</Text>
-        <Text style={styles.location}><MaterialIcons name="location-on" size={16} /> {location}</Text>
-        <Text style={styles.salary}><MaterialIcons name="attach-money" size={16} /> {salary}</Text>
-        <Text style={styles.jobType}><MaterialIcons name="work" size={16} /> {type}</Text>
+export default function JobScreen() {
+  const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [filteredJobs, setFilteredJobs] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedItem, setSelectedItem] = useState({ id: null, label: null });
+  const options = [
+    { id: 20, label: "ყველა კატეგორია" },
+    { id: 1, label: "ადნინისტრაცია/მენეჯმენტი" },
+    { id: 1, label: "ზოგადი ტექნიკური პერსონალი" },
+    { id: 2, label: "გაყიდვები" },
+    { id: 3, label: "ფინანსები/სტატისტიკა" },
+    { id: 4, label: "PR/მარკეტინგი" },
+    { id: 5, label: "ლოგისტიკა/ტრანსპორტი/დისტრიბუცია" },
+    { id: 11, label: "მშენებლობა/რემონტი" },
+    { id: 16, label: "დასუფთავება" },
+    { id: 17, label: "დაცვა/უსაფრთხოება" },
+    { id: 6, label: "IT/პროგრამირება" },
+    { id: 13, label: "მედია/გამომცემლობა" },
+    { id: 12, label: "განათლება" },
+    { id: 7, label: "სამართალი" },
+    { id: 8, label: "მედიცინა/ფარმაცია" },
+    { id: 14, label: "სილამაზე/მოდა" },
+    { id: 10, label: "კვება" },
+    { id: 9, label: "სხვა" },
+  ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(
+        `https://www.jobs.ge/?page=1&q=&cid=${selectedItem.id == 20 ? "" : selectedItem.id}&lid=1`,
+      );
+      const html = response.data;
+
+      const jobRegex = /<a href="([^"]+)" class="vip">(.*?)<\/a>/g;
+      const jobsData = [];
+      let match;
+
+      while ((match = jobRegex.exec(html)) !== null) {
+        jobsData.push({
+          id: match[1],
+          title: match[2],
+          link: match[1],
+        });
+      }
+
+      setJobs(jobsData);
+      setLoading(false);
+    };
+
+    if (selectedItem.id !== null) {
+      setLoading(true);
+      fetchData();
+    } else {
+      fetchData();
+    }
+  }, [selectedItem.id]);
+
+  useEffect(() => {
+    const filtered = jobs.filter((job) =>
+      job.title.toLowerCase().includes(searchQuery.toLowerCase()),
+    );
+    setFilteredJobs(filtered);
+  }, [searchQuery, jobs]);
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Flow size={48} color="#673ab7" />
       </View>
-    </View>
-  </TouchableOpacity>
-);
-
-const JobScreen = () => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [selectedJob, setSelectedJob] = useState(null);
-
-  const openModal = (job) => {
-    setSelectedJob(job);
-    setModalVisible(true);
-  };
-
-  const closeModal = () => {
-    setModalVisible(false);
-  };
+    );
+  }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={styles.rootContainer}>
       <View style={styles.container}>
-        <SectionList
-          sections={jobs}
+        <TextInput
+          style={styles.searchInput}
+          placeholder="ძებნა..."
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+        />
+        <FlatList
+          data={filteredJobs}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <JobItem
-              title={item.title}
-              company={item.company}
-              location={item.location}
-              salary={item.salary}
-              type={item.type}
-              onPress={() => openModal(item)}
-            />
+            <JobItem title={item.title} link={item.link} />
           )}
-          renderSectionHeader={({ section: { title } }) => (
-            <Text style={styles.sectionHeader}>{title}</Text>
+          ListHeaderComponent={() => (
+            <View style={styles.headerContainer}>
+              <Picker
+                style={styles.selectStyle}
+                selectedValue={selectedItem.id}
+                onValueChange={(itemId) => {
+                  const selectedOption = options.find(
+                    (option) => option.id == itemId,
+                  );
+                  setSelectedItem(selectedOption);
+                }}
+              >
+                {options.map((option) => (
+                  <Picker.Item
+                    key={option.id}
+                    label={option.label}
+                    value={option.id}
+                  />
+                ))}
+              </Picker>
+            </View>
           )}
         />
-
-        {selectedJob && (
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={closeModal}
-          >
-            <View style={styles.modalContainer}>
-              <View style={styles.modalView}>
-                <Text style={styles.modalTitle}>{selectedJob.title}</Text>
-                <Text style={styles.companyName}>{selectedJob.company}</Text>
-                <View style={styles.modalDetails}>
-                  <Text style={styles.location}><MaterialIcons name="location-on" size={16} /> {selectedJob.location}</Text>
-                  <Text style={styles.salary}><MaterialIcons name="attach-money" size={16} /> {selectedJob.salary}</Text>
-                  <Text style={styles.jobType}><MaterialIcons name="work" size={16} /> {selectedJob.type}</Text>
-                </View>
-                <Text style={styles.modalDescription}>
-                  Samsaxuri gamoagzavnet aplikacia aq da chven gipasuxebt aucileblad
-                </Text>
-                <TouchableOpacity style={styles.applyButton}>
-                  <Text style={styles.applyButtonText}>Apply Now</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.closeButton} onPress={closeModal}>
-                  <Text style={styles.closeButtonText}>Close</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </Modal>
-        )}
       </View>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  container: {
+  rootContainer: {
     flex: 1,
-    padding: width * 0.05,
-    backgroundColor: '#fff',
+    backgroundColor: "#F3F3F3FF",
   },
-  card: {
-    backgroundColor: '#fff',
-    padding: width * 0.05,
-    marginVertical: width * 0.03,
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 5,
+  container: {
+    marginTop: Platform.OS === "android" && width * 0.1,
   },
-  jobRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  jobTitle: {
-    fontSize: normalize(16),
-    fontWeight: 'bold',
-  },
-  companyName: {
-    fontSize: normalize(14),
-    color: '#555',
-    marginTop: 5,
-  },
-  location: {
-    fontSize: normalize(12),
-    color: '#555',
-    marginTop: 5,
-  },
-  salary: {
-    fontSize: normalize(12),
-    color: '#555',
-    marginTop: 5,
-  },
-  jobType: {
-    fontSize: normalize(12),
-    color: '#555',
-    marginTop: 5,
-  },
+
   sectionHeader: {
     fontSize: normalize(18),
-    fontWeight: 'bold',
-    backgroundColor: '#fff',
-    color: '#673ab7',
+    fontWeight: "bold",
+    backgroundColor: "#F3F3F3FF",
+    color: "#673ab7",
     paddingVertical: width * 0.03,
     paddingHorizontal: width * 0.04,
   },
-  modalContainer: {
+  searchInput: {
+    height: width * 0.1,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderRadius: 24,
+    paddingHorizontal: width * 0.03,
+    marginTop: width * 0.05,
+    marginHorizontal: width * 0.05,
+  },
+  selectStyle: {
+    marginHorizontal: width * 0.03,
+    color: "#646464",
+  },
+  loadingContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.7)', 
-  },
-  modalView: {
-    width: '90%',
-    maxWidth: 400,
-    backgroundColor: '#ffffff',
-    borderRadius: 15,
-    padding: width * 0.06,
-    shadowColor: '#000',
-    shadowOpacity: 0.25,
-    shadowRadius: 10,
-    elevation: 10,
-    alignItems: 'center', 
-  },
-  modalTitle: {
-    fontSize: normalize(20),
-    fontWeight: 'bold',
-    marginBottom: 10,
-    color: '#333',
-  },
-  modalDetails: {
-    marginBottom: 15,
-    alignItems: 'flex-start', 
-  },
-  modalDescription: {
-    fontSize: normalize(14),
-    color: '#666',
-    textAlign: 'center',
-    marginVertical: 10,
-  },
-  applyButton: {
-    marginTop: 20,
-    paddingVertical: 10,
-    paddingHorizontal: 30,
-    backgroundColor: '#673ab7',
-    borderRadius: 5,
-    alignItems: 'center',
-  },
-  applyButtonText: {
-    color: '#fff',
-    fontSize: normalize(16),
-    fontWeight: 'bold',
-  },
-  closeButton: {
-    marginTop: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 30,
-    backgroundColor: '#e53935',
-    borderRadius: 5,
-    alignItems: 'center',
-  },
-  closeButtonText: {
-    color: '#fff',
-    fontSize: normalize(16),
-    fontWeight: 'bold',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
   },
 });
-
-export default JobScreen;
