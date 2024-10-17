@@ -219,6 +219,7 @@ const SubjectsScreen = () => {
             <Text style={styles.sectionHeader}>{title}</Text>
           )}
           contentContainerStyle={{ paddingVertical: width * 0.05 }}
+          stickySectionHeadersEnabled={true}
         />
 
         {selectedSubject && (

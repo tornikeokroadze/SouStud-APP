@@ -16,6 +16,7 @@ import { Flow } from "react-native-animated-spinkit";
 import { Picker } from "@react-native-picker/picker";
 import axios from "axios";
 import JobItem from "../components/JobItem";
+import { FlatList } from "react-native";
 
 const { width } = Dimensions.get("window");
 const scale = width / 320;
@@ -101,26 +102,26 @@ export default function JobScreen() {
   return (
     <SafeAreaView style={styles.rootContainer}>
       <View style={styles.container}>
-        <SectionList
-          sections={[{ title: "მიმდინარე ვაკანსიები", data: filteredJobs }]}
+        <TextInput
+          style={styles.searchInput}
+          placeholder="ძებნა..."
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+        />
+        <FlatList
+          data={filteredJobs}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <JobItem title={item.title} link={item.link} />
           )}
-          renderSectionHeader={({ section: { title } }) => (
-            <>
-              <TextInput
-                style={styles.searchInput}
-                placeholder="ძებნა..."
-                value={searchQuery}
-                onChangeText={setSearchQuery}
-              />
+          ListHeaderComponent={() => (
+            <View style={styles.headerContainer}>
               <Picker
                 style={styles.selectStyle}
                 selectedValue={selectedItem.id}
                 onValueChange={(itemId) => {
                   const selectedOption = options.find(
-                    (option) => option.id === itemId,
+                    (option) => option.id == itemId,
                   );
                   setSelectedItem(selectedOption);
                 }}
@@ -133,8 +134,7 @@ export default function JobScreen() {
                   />
                 ))}
               </Picker>
-              <Text style={styles.sectionHeader}>{title}</Text>
-            </>
+            </View>
           )}
         />
       </View>

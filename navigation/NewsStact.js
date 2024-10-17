@@ -19,6 +19,7 @@ export default function NewsStack() {
         options={({ navigation }) => ({
           title: "",
           gestureEnabled: true,
+          headerBackTitle: "უკან",
         })}
       />
     </Stack.Navigator>

@@ -17,7 +17,7 @@ import { useSelector } from "react-redux";
 const { width, height } = Dimensions.get("window");
 
 export default function NewsShowScreen({ route }) {
-  const { id = null } = route.params;
+  const { id } = route.params;
   const { newsData } = useSelector((state) => state.news);
   const filteredNews = newsData.find((newsItem) => newsItem.id === id);
   const [modalVisible, setModalVisible] = useState(false);
@@ -36,7 +36,7 @@ export default function NewsShowScreen({ route }) {
         <TouchableOpacity onPress={handleImagePress}>
           <Image
             source={{ uri: filteredNews.image }}
-            resizeMode="contain"
+            resizeMode="cover"
             style={styles.image}
           />
         </TouchableOpacity>

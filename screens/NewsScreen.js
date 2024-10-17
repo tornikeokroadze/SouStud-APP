@@ -5,16 +5,25 @@ import {
   SafeAreaView,
   Platform,
   Dimensions,
-  ScrollView,
+  Text,
   SectionList,
+  PixelRatio,
 } from "react-native";
 import NewsCard from "../components/NewsCard";
-import { images } from "../constants";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { news } from "../store/newsAction";
+import { FlatList } from "react-native";
 
 const { width } = Dimensions.get("window");
+
+const scale = width / 320;
+
+const normalize = (size) => {
+  const newSize = size * scale;
+  return PixelRatio.get() >= 3 ? newSize : newSize - 2;
+};
 
 const truncateText = (text, limit) => {
   if (text.length > limit) {
@@ -45,8 +54,8 @@ export default function NewsScreen({ navigation }) {
   }
   return (
     <SafeAreaView style={styles.rootContainer}>
-      <SectionList
-        sections={[{ title: "News", data: newsData }]}
+      <FlatList
+        data={newsData}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={styles.innerConatiner}>
@@ -78,5 +87,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
+  },
+  sectionHeader: {
+    fontSize: normalize(18),
+    fontWeight: "bold",
+    backgroundColor: "#F3F3F3FF",
+    color: "#673ab7",
+    paddingVertical: width * 0.03,
+    paddingHorizontal: width * 0.04,
   },
 });

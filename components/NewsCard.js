@@ -51,7 +51,6 @@ export default NewsCard;
 const styles = StyleSheet.create({
   container: {
     borderRadius: 20,
-    marginVertical: 8,
   },
   pressed: {
     opacity: 0.6,
