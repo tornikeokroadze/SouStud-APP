@@ -1,5 +1,5 @@
 import { Flow } from "react-native-animated-spinkit";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, LogBox } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +8,6 @@ import LoginStack from "../navigation/LoginStack";
 import { useEffect } from "react";
 import { checkToken } from "../store/authActions";
 import { usePushNotifications } from "../notification/usePushNotifications";
-import { LogBox } from "react-native";
 
 LogBox.ignoreAllLogs();
 
