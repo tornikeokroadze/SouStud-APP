@@ -8,10 +8,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useState } from "react";
-
 import NewsModal from "../components/NewsModal";
 import RenderHtml from "react-native-render-html";
-
 import { useSelector } from "react-redux";
 
 const { width, height } = Dimensions.get("window");
@@ -32,7 +30,7 @@ export default function NewsShowScreen({ route }) {
 
   return (
     <View style={styles.rootContainer}>
-      <View style={styles.imageConatiner}>
+      <View style={styles.imageContainer}>
         <TouchableOpacity onPress={handleImagePress}>
           <Image
             source={{ uri: filteredNews.image }}
@@ -48,9 +46,9 @@ export default function NewsShowScreen({ route }) {
         imageUrl={{ uri: filteredNews.image }}
       />
 
-      <View style={styles.srcollConatiner}>
+      <View style={styles.scrollContainer}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.contentConatiner}>
+          <View style={styles.contentContainer}>
             <Text style={styles.title}>{filteredNews.title}</Text>
             <RenderHtml
               contentWidth={width}
@@ -69,7 +67,7 @@ const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
   },
-  imageConatiner: {
+  imageContainer: {
     position: "absolute",
     top: 0,
     width: "100%",
@@ -80,16 +78,16 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  srcollConatiner: {
+  scrollContainer: {
     flex: 1,
-    backgroundColor: "#FFFFFFFF",
+    backgroundColor: "#FFFFFF",
     borderTopStartRadius: 30,
     borderTopEndRadius: 30,
     marginTop: height * 0.37,
     overflow: "hidden",
     zIndex: 2,
   },
-  contentConatiner: {
+  contentContainer: {
     flex: 1,
     alignItems: "center",
     flexWrap: "wrap",
@@ -108,5 +106,11 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     flexShrink: 1,
     fontSize: width * 0.04,
+  },
+  errorText: {
+    textAlign: "center",
+    marginTop: height * 0.2,
+    fontSize: 18,
+    color: "red",
   },
 });

@@ -22,6 +22,7 @@
     "expo-linear-gradient": "~13.0.2",
     "expo-notifications": "~0.28.18",
     "expo-status-bar": "~1.12.1",
+    "html-to-markdown": "^1.0.0",
     "react": "18.2.0",
     "react-native": "0.74.5",
     "react-native-animated-spinkit": "^1.5.2",

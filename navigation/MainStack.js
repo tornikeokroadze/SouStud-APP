@@ -8,6 +8,9 @@ import LoginStack from "../navigation/LoginStack";
 import { useEffect } from "react";
 import { checkToken } from "../store/authActions";
 import { usePushNotifications } from "../notification/usePushNotifications";
+import { LogBox } from "react-native";
+
+LogBox.ignoreAllLogs();
 
 const Stack = createNativeStackNavigator();
 
