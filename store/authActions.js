@@ -35,6 +35,7 @@ export const login = (credentials) => async (dispatch) => {
 
 export const logoutUser = () => async (dispatch) => {
   dispatch(logoutRequest());
+
   try {
     const token = await AsyncStorage.getItem("token");
 
@@ -48,6 +49,10 @@ export const logoutUser = () => async (dispatch) => {
       );
     }
   } catch (error) {
+    console.error(
+      "Logout error:",
+      error.response ? error.response.data : error,
+    );
     return;
   } finally {
     await AsyncStorage.removeItem("token");
@@ -59,6 +64,7 @@ export const checkToken = () => async (dispatch) => {
   dispatch(loginRequest());
 
   const token = await AsyncStorage.getItem("token");
+  console.log(token);
   // const token = await AsyncStorage.removeItem("token");
   if (token == null) {
     dispatch(logout());

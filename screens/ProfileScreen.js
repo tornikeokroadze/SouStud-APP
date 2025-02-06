@@ -23,29 +23,32 @@ export default function ProfileScreen() {
   const { user } = useSelector((state) => state.auth);
   const [activeContent, setActiveContent] = useState("one");
 
-  function logOutHandler() {
+  const logOutHandler = () => {
     Alert.alert(
       "გასვლა",
       `${user.name} ნამდვილად გსურთ გასვლა?`,
       [
         {
           text: "არა",
+          style: "cancel",
         },
         {
           text: "დიახ",
-          onPress: () => dispatch(logoutUser()),
+          onPress: () => {
+            dispatch(logoutUser());
+          },
         },
       ],
       { cancelable: false },
     );
-  }
+  };
 
   return (
     <View style={styles.rootContainer}>
       <View style={styles.headerContainer}>
         <View style={styles.circle}></View>
-        <Pressable onPress={logOutHandler}>
-          <View style={styles.logOut}>
+        <Pressable onPress={logOutHandler} style={styles.logOut}>
+          <View>
             <Image
               source={icons.exit}
               resizeMode="contain"
