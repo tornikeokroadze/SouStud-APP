@@ -14,7 +14,7 @@ export default function TabNavigation() {
       activeColor="#FFFFFF"
       inactiveColor="#FFFFFF"
       barStyle={{ backgroundColor: "#673ab7" }}
-      shifting={true}
+      shifting={false}
     >
       <Tab.Screen
         name="Profile"
@@ -23,6 +23,7 @@ export default function TabNavigation() {
           tabBarLabel: "პროფილი",
           tabBarIcon: ({ focused }) => (
             <Image
+                key="profile-icon"
               source={icons.user}
               resizeMode="contain"
               style={[
@@ -31,6 +32,8 @@ export default function TabNavigation() {
               ]}
             />
           ),
+            tabBarPress: () => console.log("Profile tab pressed!"),
+
         }}
       />
       <Tab.Screen
@@ -40,6 +43,7 @@ export default function TabNavigation() {
           tabBarLabel: "საგნები",
           tabBarIcon: ({ focused }) => (
             <Image
+                key="book-icon"
               source={icons.book}
               resizeMode="contain"
               style={[
@@ -57,6 +61,7 @@ export default function TabNavigation() {
           tabBarLabel: "ვაკანსიები",
           tabBarIcon: ({ focused }) => (
             <Image
+                key="job-icon"
               source={icons.job}
               resizeMode="contain"
               style={[
@@ -74,6 +79,7 @@ export default function TabNavigation() {
           tabBarLabel: "სიახლეები",
           tabBarIcon: ({ focused }) => (
             <Image
+                key="news-icon"
               source={icons.news}
               resizeMode="contain"
               style={[

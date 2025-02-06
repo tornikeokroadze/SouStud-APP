@@ -7,7 +7,7 @@ import {
   Image,
   Pressable,
   ScrollView,
-  Alert,
+  Alert, TouchableOpacity,
 } from "react-native";
 
 import { icons } from "../constants";
@@ -24,35 +24,36 @@ export default function ProfileScreen() {
   const [activeContent, setActiveContent] = useState("one");
 
   function logOutHandler() {
-    Alert.alert(
-      "გასვლა",
-      `${user.name} ნამდვილად გსურთ გასვლა?`,
-      [
-        {
-          text: "არა",
-        },
-        {
-          text: "დიახ",
-          onPress: () => dispatch(logoutUser()),
-        },
-      ],
-      { cancelable: false },
-    );
+    console.log("logout");
+    // Alert.alert(
+    //   "გასვლა",
+    //   `${user.name} ნამდვილად გსურთ გასვლა?`,
+    //   [
+    //     {
+    //       text: "არა",
+    //     },
+    //     {
+    //       text: "დიახ",
+    //       onPress: () => dispatch(logoutUser()),
+    //     },
+    //   ],
+    //   { cancelable: false },
+    // );
   }
 
   return (
     <View style={styles.rootContainer}>
       <View style={styles.headerContainer}>
         <View style={styles.circle}></View>
-        <Pressable onPress={logOutHandler}>
-          <View style={styles.logOut}>
-            <Image
-              source={icons.exit}
-              resizeMode="contain"
-              style={{ width: "100%", height: "100%", tintColor: "#FFFFFF" }}
-            />
-          </View>
-        </Pressable>
+          <Pressable onPress={() => console.log("onPress")}>
+            <View style={styles.logOut}>
+              <Image
+                source={icons.exit}
+                resizeMode="contain"
+                style={{ width: "100%", height: "100%", tintColor: "#FFFFFF" }}
+              />
+            </View>
+          </Pressable>
       </View>
       <View style={styles.contentContainer}>
         <View style={styles.contentInnerContainer}>

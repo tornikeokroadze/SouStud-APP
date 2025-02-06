@@ -5,7 +5,7 @@ import {
   Dimensions,
   ScrollView,
   Image,
-  TouchableOpacity,
+  TouchableOpacity, Pressable,
 } from "react-native";
 import { useState } from "react";
 import NewsModal from "../components/NewsModal";
@@ -31,13 +31,13 @@ export default function NewsShowScreen({ route }) {
   return (
     <View style={styles.rootContainer}>
       <View style={styles.imageContainer}>
-        <TouchableOpacity onPress={handleImagePress}>
+        <Pressable onPress={handleImagePress}>
           <Image
             source={{ uri: filteredNews.image }}
             resizeMode="cover"
             style={styles.image}
           />
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       <NewsModal

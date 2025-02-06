@@ -1,5 +1,6 @@
 {
   "expo": {
+    "newArchEnabled": true,
     "name": "SouStudApp",
     "slug": "soustud-app",
     "version": "1.0.0",
@@ -12,12 +13,14 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
+      "newArchEnabled": true,
       "supportsTablet": true,
       "infoPlist": {
         "UIBackgroundModes": ["location", "fetch", "remote-notification"]
       }
     },
     "android": {
+      "newArchEnabled": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"

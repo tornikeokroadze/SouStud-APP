@@ -144,7 +144,7 @@ const normalize = (size) => {
   }
 };
 
-const SubjectItem = ({ name, lecturer, totalScore, onPress, passed }) => (
+const SubjectItem = ({ name, lecturer, onPress, passed }) => (
   <TouchableOpacity onPress={onPress} style={styles.card}>
     <View style={styles.subjectRow}>
       <View>
@@ -298,7 +298,6 @@ const styles = StyleSheet.create({
   },
   card: {
     marginHorizontal: width * 0.05,
-    backgroundColor: "#fff",
     padding: width * 0.05,
     marginVertical: width * 0.03,
     borderRadius: 20,
